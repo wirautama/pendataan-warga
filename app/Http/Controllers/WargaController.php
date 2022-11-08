@@ -130,5 +130,21 @@ class WargaController extends Controller
         $this->WargaModel->deleteData($nik_warga);
         return redirect()->route('warga')->with('pesan', 'Data Berhasil Di Hapus');
     }
+
+    public function mutasi($nik_warga) {
+        if(!$this->WargaModel->detailData($nik_warga)){
+            abort(404);
+        }
+
+        $data = [
+            'warga' => $this->WargaModel->detailData($nik_warga),
+        ];
+        return view('mutasi.v_addmutasi', $data);
+    }
+
+    public function addMutasi($nik_warga) {
+        $this->MutasiModel->addData($data);
+        return redirect()->route('warga')->with('pesan', 'Data Berhasil Di Mutasi');
+    }
 }
  

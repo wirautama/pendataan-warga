@@ -18,6 +18,10 @@ class MutasiModel extends Model
         return DB::table('mutasi')->where('nik_mutasi', $nik_mutasi)->first();
     }
 
+    public function addData($data) {
+        DB::table('mutasi')->insert($data);
+    }
+
     public function deleteData($nik_mutasi){
         DB::table('mutasi')->where('nik_mutasi', $nik_mutasi)->delete();
     }

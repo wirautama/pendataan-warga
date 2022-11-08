@@ -46,6 +46,8 @@ Route::get('/kartukeluarga/add', [KartukeluargaController::class, 'add']);
 Route::get('/kartukeluarga/edit/{nomor_keluarga}', [KartukeluargaController::class, 'edit']);
 
 Route::get('/mutasi', [MutasiController::class, 'index'])->name('mutasi');
+Route::get('/mutasi/add/{nik_warga}', [WargaController::class, 'mutasi']);
+Route::post('/mutasi/insert/{nik_warga}', [MutasiController::class, 'insert']);
 Route::get('/mutasi/detail/{nik_mutasi}', [MutasiController::class, 'detail']);
 Route::get('/mutasi/delete/{nik_mutasi}', [MutasiController::class, 'delete']);
 

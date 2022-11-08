@@ -59,7 +59,7 @@
                     <a href="/warga/edit/{{ $data->nik_warga }}"><i class="glyphicon glyphicon-edit"></i> Ubah</a>
                   </li>
                   <li>
-                    <a href="../mutasi/create.php"><i class="glyphicon glyphicon-export"></i> Mutasi</a>
+                    <a href="/mutasi/add/{{ $data->nik_warga }}"><i class="glyphicon glyphicon-export"></i> Mutasi</a>
                   </li>
                   <li class="divider"></li>
                   <li>

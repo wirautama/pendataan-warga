@@ -38,6 +38,7 @@ class WargaModel extends Model
         return DB::table('warga')->where('nik_warga', $nik_warga)->first();
     }
 
+
     public function addData($data){
         
         DB::table('warga')->insert($data);
