@@ -8,6 +8,7 @@ use App\Http\Controllers\WargaController;
 use App\Http\Controllers\Warga_has_kartu_keluargaController;
 use App\Models\Warga_has_kartu_keluargaModel;
 use App\Models\WargaModel;
+use Carbon\Carbon;
 
 class KartukeluargaController extends Controller
 {
@@ -33,9 +34,18 @@ class KartukeluargaController extends Controller
 
         $data = [
             'kartu_keluarga' => $this->KartukeluargaModel->detailData($nomor_keluarga),
-            // 'anggota_keluarga' => $this->Warga_has_kartu_keluargaModel->anggotaKeluarga($nomor_keluarga),
-            // 'warga' => $this->WargaModel->detailData($nomor_keluarga)
         ];
+
+        
+        // $anggota_keluarga = [
+        //     'anggota_keluarga' => $this->Warga_has_kartu_keluargaModel->anggotaKeluarga(),
+        // ];
+
+        // dd($anggota_keluarga);
+
+        // 'kartu_keluarga' = $this->KartukeluargaModel->detailData($nomor_keluarga),
+        // 'anggota_keluarga' = $this->Warga_has_kartu_keluargaModel->anggotaKeluarga(),
+        // 'warga' = $this->WargaModel->allData()
 
          return view('kartukeluarga.v_detailkartukeluarga', $data);
     }
@@ -51,7 +61,56 @@ class KartukeluargaController extends Controller
         return view('kartukeluarga.v_editkartukeluarga', $data);
     }
 
+    public function editAnggota($nomor_keluarga) {
+        if(!$this->KartukeluargaModel->detailData($nomor_keluarga)){
+            abort(404);
+        }
+
+        $data = [
+            'kartu_keluarga' => $this->KartukeluargaModel->detailData($nomor_keluarga),
+        ];
+
+        // $warga = [
+        //     'warga' => $this->WargaModel->allData(),
+        // ];
+        return view('kartukeluarga.v_editanggotakartukeluarga', $data);
+    }
+
     public function add(){
-        return view('kartukeluarga.v_addkartukeluarga');
+
+        $data = [
+            'warga' => $this->WargaModel->allData(),
+        ];
+        return view('kartukeluarga.v_addkartukeluarga', $data);
+    }
+
+    public function insert() {
+        $data = [
+            'nomor_keluarga' => Request()->nomor_keluarga,
+            'nik_kepala_keluarga' => Request()->nik_kepala_keluarga,
+            'alamat_keluarga' => Request()->alamat_keluarga,
+            'desa_kelurahan_keluarga' => Request()->desa_kelurahan_keluarga,
+            'kecamatan_keluarga' => Request()->kecamatan_keluarga,
+            'kabupaten_kota_keluarga' => Request()->kabupaten_kota_keluarga,
+            'provinsi_keluarga' => Request()->provinsi_keluarga,
+            'negara_keluarga' => Request()->negara_keluarga,
+            'rt_keluarga' => Request()->rt_keluarga,
+            'rw_keluarga' => Request()->rw_keluarga,
+            'kode_pos_keluarga' => Request()->kode_pos_keluarga,
+            'negara_keluarga' => Request()->negara_keluarga,
+            'rt_keluarga' => Request()->rt_keluarga,
+            'rw_keluarga' => Request()->rw_keluarga,
+            'id_user' => '1',
+            'created_at' => Carbon::now()->toDateTimeString(),
+            'updated_at' => Carbon::now()->toDateTimeString()
+            
+        ];
+        $this->KartukeluargaModel->addData($data);
+        return redirect()->route('kartukeluarga')->with('pesan', 'Data Berhasil Di Tambahkan');
+    }
+
+    public function delete($nomor_keluarga) {
+        $this->KartukeluargaModel->deleteData($nomor_keluarga);
+        return redirect()->route('kartukeluarga')->with('pesan', 'Data Berhasil Di Hapus');
     }
 }

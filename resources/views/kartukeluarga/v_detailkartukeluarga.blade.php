@@ -108,12 +108,12 @@
   </thead>
   <tbody>
     <?php $nomor = 1; ?>
-@foreach($kartu_keluarga as $data)
+{{-- @foreach($anggota_keluarga as $data) --}}
     <tr>
       <td>{{ $nomor++ }} .</td>
-      <td>{{ $kartu_keluarga->nik_warga }}</td>
-      <td>{{ $kartu_keluarga->nama_warga }}</td>
-      <td>{{ $kartu_keluarga->tempat_lahir_warga }}</td>
+      {{-- <td>{{ $data->nik_warga }}</td>
+      <td>{{ $data->nama_warga }}</td>
+      <td>{{ $data->tempat_lahir_warga }}</td> --}}
       <td>
         
       </td>
@@ -137,7 +137,7 @@
         </div>
       </td>
     </tr>
-@endforeach
+{{-- @endforeach --}}
   </tbody>
 </table>
 <a href="/user" class="btn btn-success btn-lg">Kembali</a>

@@ -36,5 +36,14 @@ class KartukeluargaModel extends Model
     public function editData($nomor_keluarga, $data){
         DB::table('kartu_keluarga')->where('nomor_keluarga', $nomor_keluarga)->update($data);
     }
+
+    public function editAnggota($nomor_keluarga, $data) {
+        DB::table('warga_has_kartu_keluarga');
+    }
+    // "INSERT INTO warga_has_kartu_keluarga (nik_warga, nomor_keluarga) VALUES ('$nik_warga', '$nomor_keluarga');";
+
+    public function deleteData($nomor_keluarga){
+        DB::table('kartu_keluarga')->where('nomor_keluarga', $nomor_keluarga)->delete();
+    }
 }
 

@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Log in</title>
+  <title>Pendataan Warga | Log in</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -19,41 +19,56 @@
   <link rel="stylesheet" href="{{asset('template/')}}/plugins/iCheck/square/blue.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition login-page">
+
+  
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>Pendataan</b>Warga</a>
+    <a href=""><b>Pendataan</b>Warga</a>
   </div>
+  @if(session()->has('success'))
+    <div class="alert alert-success alert-dismissible">
+      {{ session('success') }}
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    </div>
+  @endif
   <!-- /.login-logo -->
   <div class="login-box-body">
+    
+{{-- 
+  @if(session('LoginError'))
+    <div class="alert alert-success alert-dismissible">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <h4> Success! {{ session('LoginError') }}. <i class="glyphicon glyphicon-ok"></i></h4>
+    </div>
+  @endif --}}
+
+  
+
     <p class="login-box-msg">Masuk Untuk Memulai Sesi Anda</p>
 
-    <form action="{{ route('login') }}" method="post">
-      @csrf
+    <form action="{{ route('postlogin') }}" method="POST" enctype="multipart/form-data">
+      @csrf 
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="Username" name="username_user">
-        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+        <input type="email" class="form-control" placeholder="Username" name="email">
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+        
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password" name="passsword_user">
+        <input type="password" class="form-control" placeholder="Password" name="password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
         <div class="col-xs-8">
-          <div class="checkbox icheck">
+          {{-- <div class="checkbox icheck">
             <label>
               <input type="checkbox"> Ingat Saya
             </label>
-          </div>
+          </div> --}}
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
@@ -68,7 +83,7 @@
     <!-- /.social-auth-links -->
 
     <a href="#">Lupa Password</a><br>
-    <a href="register.html" class="text-center">Daftar Akun Baru</a>
+    <a href="/registration" class="text-center">Daftar Akun Baru</a>
 
   </div>
   <!-- /.login-box-body -->

@@ -21,11 +21,11 @@
         <td>:</td>
         <td><input type="password" class="form-control @error('password_user') is-invalid @enderror" value="{{ old('password_user') }}" name="password_user" required></td>
       </tr>
-      <tr>
+      {{-- <tr>
         <th>Keterangan</th>
         <td>:</td>
         <td><textarea class="form-control @error('keterangan_user') is-invalid @enderror" value="{{ old('keterangan_user') }}" name="keterangan_user"></textarea></td>
-      </tr>
+      </tr> --}}
       <tr>
         <th>Status</th>
         <td>:</td>

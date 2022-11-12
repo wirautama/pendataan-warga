@@ -3,7 +3,8 @@
 @section('content')
 @section('title', 'Tambah Kartu Keluarga')
 
-<form action="store.php" method="post">
+<form action="/kartukeluarga/insert/" method="post" enctype="multipart/form-data">
+  @csrf
     <h3>A. Data Pribadi</h3>
     <table class="table table-striped table-middle">
       <tr>
@@ -57,7 +58,7 @@
       <tr>
         <th>Negara</th>
         <td>:</td>
-        <td><input type="text" class="form-control" name="negara_keluarga" value="" required></td>
+        <td><input type="text" class="form-control" name="negara_keluarga" value="INDONESIA" required></td>
       </tr>
       <tr>
         <th>RT</th>
@@ -72,13 +73,15 @@
       <tr>
         <th>Kode Pos</th>
         <td>:</td>
-        <td><input type="text" class="form-control" name="kode_pos_keluarga" value="61253" readonly required></td>
+        <td><input type="text" class="form-control" name="kode_pos_keluarga" value="61753" readonly required></td>
       </tr>
     </table>
     
     <button type="submit" class="btn btn-primary btn-lg">
       <i class="glyphicon glyphicon-floppy-save"></i> Simpan
     </button>
+
+    <a href="/kartukeluarga" class="btn btn-success btn-lg">Kembali</a>
     </form>
     
 

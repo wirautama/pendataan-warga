@@ -11,9 +11,10 @@
     </div>
 @endif
 
-<table class="table table-striped table-condensed table-hover">
+<table id="example1" class="table table-bordered table-striped">
     <thead>
       <tr>
+        <th>No.</th>
         <th>ID</th>
         <th>Nama</th>
         <th>Username</th>
@@ -26,6 +27,7 @@
     <?php $no=1; ?>
     @foreach ($user as $data)
       <tr>
+        <td>{{ $no++ }}.</td>
         <td>{{ $data->id_user }}</td>
         <td>{{ $data->nama_user }}</td>
         <td>{{ $data->username_user }}</td>

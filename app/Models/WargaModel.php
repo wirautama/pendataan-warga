@@ -34,6 +34,12 @@ class WargaModel extends Model
         return DB::table('warga')->get();
     }
 
+    public function count(){
+        return DB::table('warga')->count();
+    }
+
+
+
     public function detailData($nik_warga) {
         return DB::table('warga')->where('nik_warga', $nik_warga)->first();
     }

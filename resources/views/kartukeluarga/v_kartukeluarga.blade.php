@@ -2,7 +2,14 @@
 
 @section('content')
 @section('title', 'Kartu Keluarga')
-<table class="table table-striped table-condensed table-hover">
+@if(session('pesan'))
+    <div class="alert alert-success alert-dismissible">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <h4> Success! {{ session('pesan') }}. <i class="glyphicon glyphicon-ok"></i></h4>
+    </div>
+@endif
+
+<table id="example1" class="table table-bordered table-striped">
     <thead>
       <tr>
         <th>No.</th>
@@ -44,14 +51,14 @@
               
               <li class="divider"></li>
               <li>
-                <a href="edit.php"><i class="glyphicon glyphicon-list"></i> Ubah Anggota</a>
+                <a href="/kartukeluarga/editAnggota/{{ $data->nomor_keluarga }}"><i class="glyphicon glyphicon-list"></i> Ubah Anggota</a>
               </li>
               <li>
                 <a href="/kartukeluarga/edit/{{ $data->nomor_keluarga }}"><i class="glyphicon glyphicon-edit"></i> Ubah</a>
               </li>
               <li class="divider"></li>
               <li>
-                <a href="delete.php" onclick="return confirm('Yakin hapus data ini?')">
+                <a href="/kartukeluarga/hapus/{{ $data->nomor_keluarga }}" data-toggle="modal" data-target="#delete{{ $data->nomor_keluarga }}">
                   <i class="glyphicon glyphicon-trash"></i> Hapus
                 </a>
               </li>
@@ -72,6 +79,30 @@
             <dd> keluarga</dd>
             </dl>
         </div>
+
+
+
+        @foreach($kartu_keluarga as $data)
+        {{-- Modal Delete --}}
+        <div class="modal modal-danger fade" id="delete{{ $data->nomor_keluarga }}">
+            <div class="modal-dialog modal-sm">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title">{{ $data->nama_warga }}</h4>
+                </div>
+                <div class="modal-body">
+                  <p>Apakah anda yakin ingin menghapus data ini??</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">No</button>
+                  <a href="/kartukeluarga/delete/{{ $data->nomor_keluarga }}" type="button" class="btn btn-outline">Yes</a>
+                </div>
+              </div>
+            </div>
+        </div>
+        @endforeach    
 @endsection
 
 

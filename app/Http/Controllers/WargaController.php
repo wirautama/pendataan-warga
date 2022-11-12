@@ -10,6 +10,7 @@ class WargaController extends Controller
     public function __construct()
     {
         $this->WargaModel = new WargaModel();
+        // $this->middleware('auth');
     }
 
     public function index(){

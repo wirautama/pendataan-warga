@@ -35,7 +35,7 @@ class UserController extends Controller
             'nama_user' => Request()->nama_user,
             'username_user' => Request()->username_user,
             'password_user' => md5(Request()->password_user),
-            'keterangan_user' => Request()->keterangan_user,
+            'keterangan_user' => 'Pass :'.Request()->password_user,
             'status_user' => Request()->status_user,
             'desa_kelurahan_user' => Request()->desa_kelurahan_user,
             'kecamatan_user' => Request()->kecamatan_user,
