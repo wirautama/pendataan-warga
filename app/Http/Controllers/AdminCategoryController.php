@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\warga;
+use App\Models\UserModel;
 use Illuminate\Http\Request;
 
 class AdminCategoryController extends Controller
@@ -14,8 +14,8 @@ class AdminCategoryController extends Controller
      */
     public function index()
     {
-        $this->authorize('admin');
-        return view('warga.v_datawarga', ['warga' => Warga::all] );
+        $this->authorize('Admin');
+        return view('user.v_user', ['user' => UserModel::all()] );
     }
 
     /**

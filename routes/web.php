@@ -62,6 +62,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/mutasi/delete/{nik_mutasi}', [MutasiController::class, 'delete']);
 
     // Halaman User
+    Route::resource('/user', AdminCategoryController::class)->except('show')->middleware('Admin');
     Route::get('/user', [UserController::class, 'index'])->name('user');
     Route::get('/user/detail/{id_user}', [UserController::class, 'detail']);
     Route::get('/user/add', [UserController::class, 'add']);
@@ -72,7 +73,7 @@ Route::group(['middleware' => ['auth']], function(){
 
 
     // Halaman Admin
-    // Route::resource('/warga', AdminCategoryController::class)->except('show')->middleware('Admin');
+    
 
 
 }); 

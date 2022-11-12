@@ -11,8 +11,10 @@
     <li class="{{ Request::is('/mutasi*') ? 'active' : '' }}">
       <a href="/mutasi"><i class="glyphicon glyphicon-send"></i><span>Mutasi</span></a>
     </li>
+    @can('Admin')
     <li class="header">ADMINISTRATOR</li>
-    <li class="{{ request()->is('/user')? 'active' : '' }}">
+    <li class="{{ Request::is('/user')? 'active' : '' }}">
       <a href="/user"><i class="fa fa-user"></i> <span>User</span></a>
     </li>
+    @endcan
   </ul>
