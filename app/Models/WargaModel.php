@@ -9,6 +9,8 @@ use App\Models\WargaModel;
 
 class WargaModel extends Model
 {
+    public $table = "warga";
+
 
     protected $fillable = [
         'nik_warga', 
@@ -34,9 +36,9 @@ class WargaModel extends Model
         return DB::table('warga')->get();
     }
 
-    public function count(){
-        return DB::table('warga')->count();
-    }
+    // public function count(){
+    //     return DB::table('warga')->count();
+    // }
 
 
 

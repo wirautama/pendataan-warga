@@ -2,7 +2,7 @@
 
 @section('content')
 @section('title', 'Edit Kartu Keluarga')
-<form action="update.php" method="post">
+<form action="" method="post">
   <h3>A. Data Pribadi</h3>
   <table class="table table-striped table-middle">
     <tr>
@@ -15,12 +15,12 @@
       <td>:</td>
       <td>
         <select class="form-control selectlive" name="nik_kepala_keluarga" required>
-          <option value="" selected></option>
-          {{-- <?php foreach ($data_warga as $warga) : ?> --}}
-          {{-- <option value="<?php echo $warga['nomor_keluarga'] ?>">
-            <?php echo $warga['nama_warga'] ?> (NIK: <?php echo $warga['nik_warga'] ?>)
+          <option value="{{ $kartu_keluarga->nik_kepala_keluarga }}" selected>{{ $kartu_keluarga->nama_warga }}</option>
+          @foreach ($data_warga as $warga)  
+           <option value="{{ $kartu_keluarga->nomor_keluarga }}">
+           {{ $warga->nama_warga }} (NIK: {{ $warga->nik_warga }})
           </option>
-          <?php endforeach ?> --}}
+          @endforeach 
         </select>
       </td>
     </tr>

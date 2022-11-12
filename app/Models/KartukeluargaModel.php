@@ -9,6 +9,9 @@ use App\Models\KartukeluargaModel;
 
 class KartukeluargaModel extends Model
 {
+    public $table = "kartu_keluarga";
+    
+
     public function allData()
     {
         return DB::table('kartu_keluarga')
@@ -23,13 +26,18 @@ class KartukeluargaModel extends Model
     public function detailData($nomor_keluarga) {
         return DB::table('kartu_keluarga')
         ->leftJoin('warga', 'kartu_keluarga.nik_kepala_keluarga', '=', 'warga.nik_warga')
-        ->where('nomor_keluarga', $nomor_keluarga)->first();
+        ->where('nomor_keluarga', $nomor_keluarga)->first();  
+    }
 
-        // $anggota_keluarga = DB::table('warga')
-        //  ->join('warga_has_kartu_keluarga', 'warga_has_kartu_keluarga.nik_warga', '=', 'warga.nik_warga')
-        //  ->where('warga_has_kartu_keluarga.nomor_keluarga', '=', $nomor_keluarga)->first();  
-           }
+    public function anggotaKeluarga($nomor_keluarga) {
+        return DB::table('warga')
+         ->join('warga_has_kartu_keluarga', 'warga_has_kartu_keluarga.nik_warga', '=', 'warga.nik_warga')
+         ->where('warga_has_kartu_keluarga.nomor_keluarga', '=', $nomor_keluarga)->get();
+    }
 
+    public function dataWarga(){
+        return DB::table('warga')->all();
+    }
          
 
 

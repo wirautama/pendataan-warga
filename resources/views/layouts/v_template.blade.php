@@ -55,36 +55,14 @@
 
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
+          <li>
+            <a href="/dashboard"><i class="fa fa-home"></i> Dashboard</a>
+          </li>
           @auth
-          {{-- <li class="dropdown user user-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              
-              <span class="hidden-xs">Hello, {{ auth()->user()->name }}</span>
-            </a>
-            <ul class="dropdown-menu">
-              
-              <li class="user-header">
-                
-                <p>
-                  {{ auth()->user()->name }}
-                </p>
-              </li>
-            
-              <li class="user-footer">
-                <div class="pull-left">
-                  <a href="#" class="btn btn-success"><i class="glyphicon glyphicon-user"></i> Profile</a>
-                </div>
-                <div class="pull-right">
-                  <a href="" class="btn btn-danger" data-toggle="modal" data-target="#logout"><i class="glyphicon glyphicon-log-out"></i> Logout</a>
-                </div>
-              </li>
-            </ul>
-          </li> --}}
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hello, {{ auth()->user()->name }} <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i>  {{ auth()->user()->name }}<span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a href="#"><i class="glyphicon glyphicon-user"></i> Profile</a></li>
-              {{-- <li role="separator" class="divider"></li> --}}
               <li><a href="#"><i class="glyphicon glyphicon-wrench"></i> Setting</a></li>
               <li role="separator" class="divider"></li>
               <li><a href="" data-toggle="modal" data-target="#logout"><i class="glyphicon glyphicon-log-out"></i> Logout</a></li>
@@ -92,7 +70,6 @@
           </li>
           @endauth
           <!-- Control Sidebar Toggle Button -->
-          
         </ul>
       </div>
     </nav>

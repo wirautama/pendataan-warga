@@ -22,24 +22,31 @@
 
 <h3>Daftar Nama Warga</h3>
 <form action="update-anggota.php" method="post">
-  <table class="table table-striped table-middle">
+  <table id="example1" class="table table-bordered table-striped">
     <tr>
       <th width="20%">Nama Warga</th>
       <td width="1%">:</td>
       <td>
         <select class="form-control selectlive" name="nik_warga" required>
-          <option value="" selected disabled>- pilih -</option>
-          {{-- <?php foreach ($data_warga as $warga) : ?>
-          <option value="<?php echo $warga['nik_warga'] ?>">
-            <?php echo $warga['nama_warga'] ?> (NIK: <?php echo $warga['nik_warga'] ?>)
+          <option value="" selected disabled>- Pilih Warga -</option>
+          @foreach ($data_warga as $warga)
+          <option value="{{ $warga->nik_warga }}">
+            {{ $warga->nama_warga }} (NIK: {{ $warga->nik_warga }})
           </option>
-          <?php endforeach ?> --}}
+          @endforeach
         </select>
       </td>
     </tr>
+    <tr>
+      <td>
+        <button type="submit" class="btn btn-primary btn-lg" onclick="return confirm('Apakah anda yakin ingin menambahkan anggota ini?')">
+          <i class="glyphicon glyphicon-plus"></i> Tambahkan
+        </button>      
+      </td>
+    </tr>
   </table>
-
-  <table class="table table-bordered">
+  
+  <table class="table table-bordered" id="example1">
     <thead>
       <tr>
         <th>No.</th>
@@ -57,18 +64,18 @@
     </thead>
     <tbody>
         <?php $no=1; ?>
-
+      @foreach($anggota_keluarga as $anggota)
       <tr>
         <td>{{ $no++ }}.</td>
+        <td>{{ $anggota->nik_warga }}</td>
+        <td>{{ $anggota->nama_warga }}</td>
+        <td>{{ $anggota->jenis_kelamin_warga }}</td>
+        <td>{{ $anggota->tanggal_lahir_warga }}</td> 
         <td></td>
-        <td></td>
-        <td></td>
-        <td></td> 
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>{{ $anggota->pendidikan_terakhir_warga }}</td>
+        <td>{{ $anggota->pekerjaan_warga }}</td>
+        <td>{{ $anggota->status_perkawinan_warga }}</td>
+        <td>{{ $anggota->status_warga }}</td>
         <td>
           <!-- Single button -->
           <div class="btn-group pull-right">
@@ -89,18 +96,13 @@
           </div>
         </td>
       </tr>
-      
+      @endforeach
     </tbody>
   </table>
-
-  {{-- <input type="hidden" name="nomor_keluarga" value="<?php echo $get_nomor_keluarga ?>"> --}}
-
-  <button type="submit" class="btn btn-primary btn-lg" onclick="return confirm('Apakah anda yakin ingin menambahkan anggota ini?')">
-    <i class="glyphicon glyphicon-plus"></i> Tambahkan
-  </button>
 </form>
 
 <br><br>
+<a href="/kartukeluarga" class="btn btn-succes">Kembali</a>
 
 
 

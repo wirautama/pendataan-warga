@@ -34,14 +34,11 @@ class KartukeluargaController extends Controller
 
         $data = [
             'kartu_keluarga' => $this->KartukeluargaModel->detailData($nomor_keluarga),
+            'anggota_keluarga' => $this->KartukeluargaModel->anggotaKeluarga($nomor_keluarga),
+            'warga' => $this->WargaModel->allData()
         ];
-
-        
-        // $anggota_keluarga = [
-        //     'anggota_keluarga' => $this->Warga_has_kartu_keluargaModel->anggotaKeluarga(),
-        // ];
-
-        // dd($anggota_keluarga);
+       
+        // dd($data);
 
         // 'kartu_keluarga' = $this->KartukeluargaModel->detailData($nomor_keluarga),
         // 'anggota_keluarga' = $this->Warga_has_kartu_keluargaModel->anggotaKeluarga(),
@@ -57,7 +54,10 @@ class KartukeluargaController extends Controller
 
         $data = [
             'kartu_keluarga' => $this->KartukeluargaModel->detailData($nomor_keluarga),
+            'anggota_keluarga' => $this->KartukeluargaModel->anggotaKeluarga($nomor_keluarga),
+            'data_warga' => $this->WargaModel->allData()
         ];
+        // dd($data);
         return view('kartukeluarga.v_editkartukeluarga', $data);
     }
 
@@ -68,8 +68,10 @@ class KartukeluargaController extends Controller
 
         $data = [
             'kartu_keluarga' => $this->KartukeluargaModel->detailData($nomor_keluarga),
+            'anggota_keluarga' => $this->KartukeluargaModel->anggotaKeluarga($nomor_keluarga),
+            'data_warga' => $this->WargaModel->allData()
         ];
-
+        // dd($data);
         // $warga = [
         //     'warga' => $this->WargaModel->allData(),
         // ];

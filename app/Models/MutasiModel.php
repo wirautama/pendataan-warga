@@ -9,6 +9,8 @@ use App\Models\MutasiModel;
 
 class MutasiModel extends Model
 {
+    public $table = "mutasi";
+
     public function allData()
     {
         return DB::table('mutasi')->get();

@@ -2,58 +2,70 @@
 
 @section('content')
 @section('title', 'Dashboard')
-<div class="row">
-    <div class="col-sm-6 col-md-4">
-      <div class="panel panel-primary">
-        <div class="panel-body">
-          <h3>Data Warga</h3>
-          <p>
-            Total ada  di antaranya laki-laki, dan  diantaranya perempuan.
-          </p>
-          <p>
-             Warga di atas 17 tahun berjumlah  orang, dan di bawah 17 tahun berjumlah  orang.
-          </p>
+<section class="content">
+  <!-- Small boxes (Stat box) -->
+  <div class="row">
+    <div class="col-lg-3 col-xs-6">
+      <!-- small box -->
+      <div class="small-box bg-aqua">
+        <div class="inner">
+          <h3>{{ $warga }}</h3>
+
+          <p>WARGA</p>
         </div>
-        <div class="panel-footer">
-          <a href="../warga" class="btn btn-primary" role="button">
-            <span class="glyphicon glyphicon-book"></span> Detail »
-          </a>
+        <div class="icon">
+          <i class="fa fa-user"></i>
         </div>
+        <a href="/warga" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
       </div>
     </div>
-  
-    <div class="col-sm-6 col-md-4">
-      <div class="panel panel-primary">
-        <div class="panel-body">
-          <h3>Data Kartu Keluarga</h3>
-          <p>Total ada  data kartu keluarga</p>
+    <!-- ./col -->
+    <div class="col-lg-3 col-xs-6">
+      <!-- small box -->
+      <div class="small-box bg-green">
+        <div class="inner">
+          <h3>{{ $kartukeluarga }}</h3>
+
+          <p>KARTU KELUARGA</p>
         </div>
-        <div class="panel-footer">
-          <a href="../kartu-keluarga" class="btn btn-primary" role="button">
-            <span class="glyphicon glyphicon-inbox"></span> Detail »
-          </a>
+        <div class="icon">
+          <i class="ion ion-stats-bars"></i>
         </div>
+        <a href="/kartukeluarga" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
       </div>
     </div>
-  
-    <div class="col-sm-6 col-md-4">
-      <div class="panel panel-primary">
-        <div class="panel-body">
-          <h3>Data Mutasi</h3>
-          <p>
-            Total ada  data mutasi.  di antaranya laki-laki, dan  diantaranya perempuan.
-          </p>
-          <p>
-             Warga di atas 17 tahun berjumlah  orang, dan di bawah 17 tahun berjumlah  orang.
-          </p>
+    <!-- ./col -->
+    <div class="col-lg-3 col-xs-6">
+      <!-- small box -->
+      <div class="small-box bg-yellow">
+        <div class="inner">
+          <h3>{{ $user }}</h3>
+
+          <p>PENGGUNA TERDAFTAR</p>
         </div>
-        <div class="panel-footer">
-          <a href="../mutasi" class="btn btn-primary" role="button">
-            <span class="glyphicon glyphicon-export"></span> Detail »
-          </a>
+        <div class="icon">
+          <i class="fa fa-users"></i>
         </div>
+        <a href="/user" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
       </div>
     </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-xs-6">
+      <!-- small box -->
+      <div class="small-box bg-red">
+        <div class="inner">
+          <h3>{{ $mutasi }}</h3>
+
+          <p>MUTASI</p>
+        </div>
+        <div class="icon">
+          <i class="glyphicon glyphicon-send"></i>
+        </div>
+        <a href="/mutasi" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+    <!-- ./col -->
   </div>
+
   
 @endsection
