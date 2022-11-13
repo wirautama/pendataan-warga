@@ -20,6 +20,11 @@
     <td>:</td>
     <td>{{ $kartu_keluarga->nik_kepala_keluarga }}</td>
   </tr>
+  <tr>
+    <th>Jumlah Anggota Keluarga</th>
+    <td>:</td>
+    <td>{{ $hitung_anggota }} orang</td>
+  </tr>
 </table>
 
 <h3>B. Data Alamat</h3>
@@ -94,7 +99,7 @@
 <table id="example1" class="table table-bordered table-striped">
   <thead>
     <tr>
-      <th>#</th>
+      <th>No.</th>
       <th>NIK</th>
       <th>Nama Warga</th>
       <th>Tempat Lahir</th>
@@ -108,18 +113,17 @@
   </thead>
   <tbody>
     <?php $nomor = 1; ?>
-@foreach($anggota_keluarga as $anggota)
+    @foreach($anggota_keluarga as $anggota)
     <tr>
       <td>{{ $nomor++ }} .</td>
       <td>{{ $anggota->nik_warga }}</td>
       <td>{{ $anggota->nama_warga }}</td>
       <td>{{ $anggota->tempat_lahir_warga }}</td>
-      <td></td>
+      <td>{{$anggota->tempat_lahir_warga }}</td>
       <td>{{ $anggota->pendidikan_terakhir_warga }}</td>
       <td>{{ $anggota->pekerjaan_warga }}</td>
       <td>{{ $anggota->status_perkawinan_warga }}</td>
       <td>{{ $anggota->status_warga }}</td>
-      <td></td>
       <td>
         <!-- Single button -->
         <div class="btn-group pull-right">
@@ -136,10 +140,9 @@
         </div>
       </td>
     </tr>
-@endforeach
+  @endforeach
   </tbody>
 </table>
 <a href="/user" class="btn btn-success btn-lg">Kembali</a>
-
 
 @endsection

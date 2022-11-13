@@ -13,17 +13,20 @@ class LoginController extends Controller
     }
 
     public function postlogin(Request $request) {
-        // dd($request->all());
+        $validated = $request->validate([
+            'email' => 'required|email:dns',
+            'password' => 'required|min:5|max:255'
+         ]);
         if (Auth::attempt($request->only('email', 'password'))){
-            return redirect('/dashboard');
+            return redirect('/dashboard')->with('success', 'Selamat Datang');
         }
-        return redirect('login');
+        return redirect('login')->with('failed', 'Username atau Password Salah');
     }
 
     public function logout(){
         Auth::logout();
         request()->session()->invalidate();
         request()->session()->regenerateToken();
-        return redirect('/');
+        return redirect('/')->with('logout', 'Terima Kasih Atas Kunjungan Anda');
     }
 }

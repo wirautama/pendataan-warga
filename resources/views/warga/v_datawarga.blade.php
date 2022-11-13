@@ -9,7 +9,7 @@
       <h4> Success! {{ session('pesan') }}. <i class="glyphicon glyphicon-ok"></i></h4>
     </div>
 @endif
-
+      
     <table id="example1" class="table table-bordered table-striped">
         <thead>
           <tr>
@@ -75,8 +75,10 @@
           @endforeach
         </tbody>
       </table>
-      <a href="/warga/add" class="btn btn-primary btn-md">Tambah Data</a><br>
 
+      <a href="/warga/add" class="btn btn-primary btn-md">Tambah Data</a>
+      <a href="/warga/print" class="btn btn-success btn-md" target="_blank">Cetak</a>
+      <a href="/warga/downloadpdf" class="btn btn-danger btn-md">Download PDF</a>
       <br><br>
 
 <div class="well">

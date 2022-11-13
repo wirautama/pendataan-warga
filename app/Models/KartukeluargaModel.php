@@ -53,5 +53,10 @@ class KartukeluargaModel extends Model
     public function deleteData($nomor_keluarga){
         DB::table('kartu_keluarga')->where('nomor_keluarga', $nomor_keluarga)->delete();
     }
+
+    public function hitungAnggota($nomor_keluarga) {
+        // SELECT COUNT(*) AS total FROM warga_has_kartu_keluarga WHERE id_keluarga = ".$kartu_keluarga['id_keluarga']
+        return DB::table('warga_has_kartu_keluarga')->where('nomor_keluarga', '=', $nomor_keluarga)->count();
+    }
 }
 

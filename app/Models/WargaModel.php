@@ -36,7 +36,9 @@ class WargaModel extends Model
         return DB::table('warga')->get();
     }
 
-    // public function count(){
+    // public function usiaWarga(){
+    //     $now = \Carbon::now();
+    //     $tgl_lahir = 
     //     return DB::table('warga')->count();
     // }
 

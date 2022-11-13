@@ -5,6 +5,12 @@
 <section class="content">
   <!-- Small boxes (Stat box) -->
   <div class="row">
+    @if(session()->has('success'))
+      <div class="alert alert-success alert-dismissible">
+      {{ session('success') }}!! {{ auth()->user()->name }}</i>
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    </div>
+    @endif
     <div class="col-lg-3 col-xs-6">
       <!-- small box -->
       <div class="small-box bg-aqua">

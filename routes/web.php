@@ -43,6 +43,8 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/warga/edit/{nik_warga}', [WargaController::class, 'edit']);
     Route::post('/warga/update/{nik_warga}', [WargaController::class, 'update']);
     Route::get('/warga/delete/{nik_warga}', [WargaController::class, 'delete']);
+    Route::get('/warga/print', [WargaController::class, 'print'])->name('print');
+    Route::get('/warga/downloadpdf', [WargaController::class, 'downloadpdf']);
 
 
     // Halaman KartuKeluarga

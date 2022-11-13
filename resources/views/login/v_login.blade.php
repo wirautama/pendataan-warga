@@ -30,22 +30,22 @@
   <div class="login-logo">
     <a href=""><b>Pendataan</b>Warga</a>
   </div>
-  @if(session()->has('success'))
-    <div class="alert alert-success alert-dismissible">
-      {{ session('success') }}
+  @if(session()->has('logout'))
+      <div class="alert alert-success alert-dismissible">
+      Anda Berhasil Logout!! {{ session('logout') }} <i class="glyphicon glyphicon-ok"></i>
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     </div>
-  @endif
+    @endif
   <!-- /.login-logo -->
   <div class="login-box-body">
     
-{{-- 
-  @if(session('LoginError'))
-    <div class="alert alert-success alert-dismissible">
+
+  @if(session('failed'))
+    <div class="alert alert-danger alert-dismissible">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <h4> Success! {{ session('LoginError') }}. <i class="glyphicon glyphicon-ok"></i></h4>
+      <h4> Maaf, {{ session('failed') }} <i class="glyphicon glyphicon-remove"></i></h4>
     </div>
-  @endif --}}
+  @endif 
 
   
 
@@ -54,13 +54,22 @@
     <form action="{{ route('postlogin') }}" method="POST" enctype="multipart/form-data">
       @csrf 
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="Username" name="email">
+        <input type="email" class="form-control @error('email') is-invalid  @enderror" placeholder="Username" name="email" value="{{ old('email') }}">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
-        
+        @error('email')
+        <div class="invalid-feedback">
+          {{ $message }}
+        </div>
+        @enderror
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password" name="password">
+        <input type="password" class="form-control @error('password') is-invalid  @enderror" placeholder="Password" name="password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        @error('password')
+        <div class="invalid-feedback">
+          {{ $message }}
+        </div>
+        @enderror
       </div>
       <div class="row">
         <div class="col-xs-8">

@@ -16,7 +16,6 @@
         <th>Nomor KK</th>
         <th>Kepala Keluarga</th>
         <th>NIK Kepala Keluarga</th>
-        <th>Jml. Anggota</th>
         <th>Alamat</th>
         <th>RT</th>
         <th>RW</th>
@@ -26,12 +25,12 @@
     <tbody>
     <?php $no=1; ?>
     @foreach ($kartu_keluarga as $data)
+    {{-- @foreach ($hitung_anggota as $anggota) --}}
       <tr>
         <td>{{ $no++ }}.</td>
         <td>{{ $data->nomor_keluarga }}</td>
         <td>{{ $data->nama_warga }}</td>
         <td>{{ $data->nik_kepala_keluarga }}</td>
-        <td></td> 
         <td>{{ $data->alamat_keluarga }}</td>
         <td>{{ $data->rt_keluarga }}</td>
         <td>{{ $data->rw_keluarga }}</td>
@@ -68,6 +67,7 @@
         </td>
       </tr>
     </tbody>
+    {{-- @endforeach --}}
     @endforeach
   </table>
   <a href="/kartukeluarga/add" class="btn btn-primary btn-md">Tambah Data</a>

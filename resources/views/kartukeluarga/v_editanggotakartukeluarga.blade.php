@@ -46,7 +46,7 @@
     </tr>
   </table>
   
-  <table class="table table-bordered" id="example1">
+  <table id="example1" class="table table-bordered table-striped">
     <thead>
       <tr>
         <th>No.</th>
@@ -54,7 +54,7 @@
         <th>Nama Warga</th>
         <th>Jenis Kelamin</th>
         <th>Lahir</th>
-        <th>Usia</th>
+        {{-- <th>Usia</th> --}}
         <th>Pendidikan</th>
         <th>Pekerjaan</th>
         <th>Kawin</th>
@@ -63,15 +63,15 @@
       </tr>
     </thead>
     <tbody>
-        <?php $no=1; ?>
-      @foreach($anggota_keluarga as $anggota)
       <tr>
+        <?php $no=1; ?>
+        @foreach($anggota_keluarga as $anggota)
         <td>{{ $no++ }}.</td>
         <td>{{ $anggota->nik_warga }}</td>
         <td>{{ $anggota->nama_warga }}</td>
         <td>{{ $anggota->jenis_kelamin_warga }}</td>
         <td>{{ $anggota->tanggal_lahir_warga }}</td> 
-        <td></td>
+        {{-- <td></td> --}}
         <td>{{ $anggota->pendidikan_terakhir_warga }}</td>
         <td>{{ $anggota->pekerjaan_warga }}</td>
         <td>{{ $anggota->status_perkawinan_warga }}</td>
@@ -84,20 +84,20 @@
             </button>
             <ul class="dropdown-menu pull-right" role="menu">
               <li>
-                <a href="/warga/detail/"><i class="glyphicon glyphicon-sunglasses"></i> Detail</a>
-              </li>
+                <a href="/warga/detail/{{ $anggota->nik_warga }}"><i class="glyphicon glyphicon-sunglasses"></i> Detail</a>
+              </li>  
+              <li class="divider"></li>
               <li>
-                <a href="/warga/hapus/" data-toggle="modal" data-target="#delete">
-                  <i class="glyphicon glyphicon-trash"></i> Hapus Anggota
+                <a href="/warga/hapus/{{ $anggota->nik_warga }}" data-toggle="modal" data-target="#delete{{ $anggota->nik_warga }}">
+                  <i class="glyphicon glyphicon-trash"></i> Hapus
                 </a>
               </li>
-             
             </ul>
           </div>
         </td>
       </tr>
-      @endforeach
     </tbody>
+    @endforeach
   </table>
 </form>
 

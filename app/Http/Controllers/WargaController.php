@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\WargaModel;
 use Carbon\Carbon;
+use DB;
+use Dompdf\Dompdf;
 
 class WargaController extends Controller
 {
     public function __construct()
     {
         $this->WargaModel = new WargaModel();
-        // $this->middleware('auth');
     }
 
     public function index(){
@@ -147,5 +148,26 @@ class WargaController extends Controller
         $this->MutasiModel->addData($data);
         return redirect()->route('warga')->with('pesan', 'Data Berhasil Di Mutasi');
     }
+
+    public function print() {
+       $data = [
+        'warga' => $this->WargaModel->allData(),
+       ];
+       return view('warga.v_printdatawarga', $data);
+    }
+
+    public function downloadpdf() {
+        $data = [
+         'warga' => $this->WargaModel->allData(),
+        ];
+        $html = view('warga.v_printdatawarga', $data);
+
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml($html);
+
+        $dompdf->setPaper('A4', 'landscape');
+        $dompdf->render();
+        $dompdf->stream();
+     }
 }
  

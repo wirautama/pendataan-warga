@@ -25,6 +25,7 @@ class KartukeluargaController extends Controller
             'kartu_keluarga' => $this->KartukeluargaModel->allData(),
         ];
         return view('kartukeluarga.v_kartukeluarga', $data);
+        // dd($data);
     }
 
     public function detail($nomor_keluarga) {
@@ -35,7 +36,8 @@ class KartukeluargaController extends Controller
         $data = [
             'kartu_keluarga' => $this->KartukeluargaModel->detailData($nomor_keluarga),
             'anggota_keluarga' => $this->KartukeluargaModel->anggotaKeluarga($nomor_keluarga),
-            'warga' => $this->WargaModel->allData()
+            'warga' => $this->WargaModel->allData(),
+            'hitung_anggota' => $this->KartukeluargaModel->hitungAnggota($nomor_keluarga)
         ];
        
         // dd($data);
@@ -115,4 +117,11 @@ class KartukeluargaController extends Controller
         $this->KartukeluargaModel->deleteData($nomor_keluarga);
         return redirect()->route('kartukeluarga')->with('pesan', 'Data Berhasil Di Hapus');
     }
+
+    // public function hitungAnggota($nomor_keluarga) {
+    //     $data = [
+    //         'anggota_keluarga' => $this->KartukeluargaModel->hitungAnggota($nomor_keluarga),
+    //     ];
+    //     return view('kartukeluarga.v_kartukeluarga', $data);
+    // }
 }
