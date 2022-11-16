@@ -21,7 +21,8 @@
 </table>
 
 <h3>Daftar Nama Warga</h3>
-<form action="update-anggota.php" method="post">
+<form action="/kartukeluarga/updateAnggota/{{ $kartu_keluarga->nomor_keluarga }}" method="post">
+  @csrf
   <table id="example1" class="table table-bordered table-striped">
     <tr>
       <th width="20%">Nama Warga</th>

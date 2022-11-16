@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\MutasiModel;
 use Carbon\Carbon;
+use Dompdf\Dompdf;
 
 class MutasiController extends Controller
 {
@@ -69,5 +70,31 @@ class MutasiController extends Controller
         $this->MutasiModel->addData($data);
         return redirect()->route('warga')->with('pesan', 'Data Berhasil Di Mutasikan');
     }
+    
+    public function cetaklaporanmutasi(){
+        $data = [
+            'mutasi' => $this->MutasiModel->allData(),
+        ];
+        return view('mutasi.v_cetaklaporanmutasi', $data);
+    }
 
+    public function downloadlaporanmutasi(){
+        $data = [
+            'mutasi' => $this->MutasiModel->allData(),
+        ];
+        $html = view('mutasi.downloadlaporanmutasi', $data);
+   
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml($html);
+   
+        $dompdf->setPaper('A4', 'potrait');
+        $dompdf->render();
+        $dompdf->stream('Download-Laporan-Mutasi.pdf');
+    }
+    public function printlaporanmutasi() {
+        $data = [
+            'mutasi' => $this->MutasiModel->allData(),
+        ];
+        return view('mutasi.printlaporanmutasi', $data);
+     }
 }

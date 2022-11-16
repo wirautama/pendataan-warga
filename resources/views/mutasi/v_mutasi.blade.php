@@ -71,6 +71,9 @@
     @endforeach
   </table>
 
+  <a href="/mutasi/add" class="btn btn-success btn-md"><i class="fa fa-plus"></i> Tambah Data</a>
+  <a href="/mutasi/cetaklaporanmutasi" class="btn btn-danger btn-md"><i class="fa fa-download"></i> Cetak / Download Laporan Kartu Keluarga PDF</a>
+
   <br><br>
 
 <div class="well">

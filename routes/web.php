@@ -60,6 +60,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/kartukeluarga/add', [KartukeluargaController::class, 'add']);
     Route::post('/kartukeluarga/insert', [KartukeluargaController::class, 'insert']);
     Route::get('/kartukeluarga/editAnggota/{nomor_keluarga}', [KartukeluargaController::class, 'editAnggota']);
+    Route::post('/kartukeluarga/updateAnggota/{nomor_keluarga}', [KartukeluargaController::class, 'updateAnggota'])->name('updateAnggota');
     Route::get('/kartukeluarga/edit/{nomor_keluarga}', [KartukeluargaController::class, 'edit']);
     Route::post('/kartukeluarga/update/{nomor_keluarga}', [KartukeluargaController::class, 'update']);
     Route::get('/kartukeluarga/delete/{nomor_keluarga}', [KartukeluargaController::class, 'delete']);
@@ -80,6 +81,10 @@ Route::group(['middleware' => ['auth']], function(){
     Route::post('/mutasi/insert/{nik_warga}', [MutasiController::class, 'insert']);
     Route::get('/mutasi/detail/{nik_mutasi}', [MutasiController::class, 'detail']);
     Route::get('/mutasi/delete/{nik_mutasi}', [MutasiController::class, 'delete']);
+    Route::get('/mutasi/cetaklaporanmutasi', [MutasiController::class, 'cetaklaporanmutasi']);
+    Route::get('/mutasi/cetaklaporanmutasi/downloadlaporanmutasi', [MutasiController::class, 'downloadlaporanmutasi']);
+    Route::get('/mutasi/cetaklaporanmutasi/printlaporanmutasi', [MutasiController::class, 'printlaporanmutasi']);
+
 
     // Halaman User
     Route::resource('/user', AdminCategoryController::class)->except('show')->middleware('Admin');

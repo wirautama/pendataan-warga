@@ -75,7 +75,7 @@
     {{-- @endforeach --}}
     @endforeach
   </table>
-  <a href="/kartukeluarga/add" class="btn btn-primary btn-md">Tambah Data</a>
+  <a href="/kartukeluarga/add" class="btn btn-success btn-md"><i class="fa fa-plus"></i> Tambah Data</a>
   {{-- <a href="/kartukeluarga/cetakkartukeluarga" class="btn btn-danger btn-md">Cetak / Prin</a> --}}
   <a href="/kartukeluarga/cetaklaporankk" class="btn btn-danger btn-md"><i class="fa fa-download"></i> Cetak / Download Laporan Kartu Keluarga PDF</a>
   

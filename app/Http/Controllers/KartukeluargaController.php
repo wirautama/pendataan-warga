@@ -109,6 +109,11 @@ class KartukeluargaController extends Controller
         return view('kartukeluarga.v_editanggotakartukeluarga', $data);
     }
 
+    public function updateAnggota($nomor_keluarga) {
+        $cek = Warga_has_kartu_keluargaModel::count()->where('nik_warga', '=', $nik_warga AND 'nomor_keluarga', '=', $nomor_keluarga );
+        dd($cek);
+    }
+
     public function add(){
 
         $data = [
