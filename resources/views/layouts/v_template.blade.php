@@ -62,8 +62,7 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i>  {{ auth()->user()->name }}<span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="#"><i class="glyphicon glyphicon-user"></i> Profile</a></li>
-              <li><a href="#"><i class="glyphicon glyphicon-wrench"></i> Setting</a></li>
+              <li><a href="/profile"><i class="glyphicon glyphicon-user"></i> Profile</a></li>
               <li role="separator" class="divider"></li>
               <li><a href="" data-toggle="modal" data-target="#logout"><i class="glyphicon glyphicon-log-out"></i> Logout</a></li>
             </ul>
@@ -173,6 +172,8 @@
 <script src="{{ asset('template/') }}/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('template/') }}/dist/js/demo.js"></script>
+<!-- PACE -->
+<script src="../../bower_components/PACE/pace.min.js"></script>
 <script>
   $(document).ready(function () {
     $('.sidebar-menu').tree()
@@ -189,6 +190,20 @@
       'ordering'    : true,
       'info'        : true,
       'autoWidth'   : true
+    })
+  })
+</script>
+
+<script type="text/javascript">
+  // To make Pace works on Ajax calls
+  $(document).ajaxStart(function () {
+    Pace.restart()
+  })
+  $('.ajax').click(function () {
+    $.ajax({
+      url: '#', success: function (result) {
+        $('.ajax-content').html('<hr>Ajax Request Completed !')
+      }
     })
   })
 </script>

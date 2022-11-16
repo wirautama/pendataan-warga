@@ -30,10 +30,20 @@
   <div class="login-logo">
     <a href=""><b>Pendataan</b>Warga</a>
   </div>
-  @if(session()->has('logout'))
-      <div class="alert alert-success alert-dismissible">
-      Anda Berhasil Logout!! {{ session('logout') }} <i class="glyphicon glyphicon-ok"></i>
+
+  @if(session()->has('success'))
+    <div class="alert alert-success alert-dismissible">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <h4><i class="icon fa fa-check"></i> Data Anda Telah Terdaftar Di Database Kami!!</h4>
+      {{ session('success') }}
+    </div>
+    @endif
+
+  @if(session()->has('logout'))
+    <div class="alert alert-success alert-dismissible">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <h4><i class="icon fa fa-check"></i> Anda Telah Logout!!</h4>
+      {{ session('logout') }}
     </div>
     @endif
   <!-- /.login-logo -->
@@ -43,7 +53,8 @@
   @if(session('failed'))
     <div class="alert alert-danger alert-dismissible">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <h4> Maaf, {{ session('failed') }} <i class="glyphicon glyphicon-remove"></i></h4>
+      <h4><i class="icon fa fa-ban"></i> Login Gagal!</h4>
+      {{ session('failed') }}
     </div>
   @endif 
 
@@ -81,7 +92,7 @@
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Masuk</button>
+          <button type="submit" class="btn btn-primary btn-block btn-flat" title="Ajax Request">Masuk</button>
         </div>
         <!-- /.col -->
       </div>

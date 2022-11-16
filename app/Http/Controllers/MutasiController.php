@@ -61,7 +61,7 @@ class MutasiController extends Controller
             'pekerjaan_mutasi' => Request()->pekerjaan_mutasi,
             'status_perkawinan_mutasi' => Request()->status_perkawinan_mutasi,
             'status_mutasi' => Request()->status_mutasi,
-            'id_user' => '1',
+            'id_user' => auth()->user()->id,
             'created_at' => Carbon::now()->toDateTimeString(),
             'updated_at' => Carbon::now()->toDateTimeString()
             

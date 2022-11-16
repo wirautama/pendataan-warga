@@ -70,6 +70,24 @@
         {{-- <span class="glyphicon glyphicon-envelope form-control-feedback"></span> --}}
       </div>
       <div class="form-group has-feedback">
+        <input type="text" id="address" class="form-control @error('address') is-invalid  @enderror" value="{{ old('address') }}" placeholder="Alamat" name="address" required>
+        @error('address')
+        <div class="invalid-feedback">
+          {{ $message }}
+        </div>
+        @enderror
+        {{-- <span class="glyphicon glyphicon-envelope form-control-feedback"></span> --}}
+      </div>
+      <div class="form-group has-feedback">
+        <input type="number" id="phone" class="form-control @error('phone') is-invalid  @enderror" value="{{ old('phone') }}" placeholder="No. Telepon" name="phone" required>
+        @error('phone')
+        <div class="invalid-feedback">
+          {{ $message }}
+        </div>
+        @enderror
+        {{-- <span class="glyphicon glyphicon-envelope form-control-feedback"></span> --}}
+      </div>
+      <div class="form-group has-feedback">
         <input type="password" id="password" class="form-control @error('password') is-invalid  @enderror" placeholder="Password" name="password" required>
         {{-- <span class="glyphicon glyphicon-lock form-control-feedback"></span> --}}
         @error('password')

@@ -4,10 +4,14 @@
 @section('title', 'Data Mutasi')
 
 @if(session('pesan'))
-    <div class="alert alert-success alert-dismissible">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <h4> Success!</h4>
-      {{ session('pesan') }}.
+    <div class="row">
+      <div class="col-lg-4 col-xs-8">
+        <div class="alert alert-success alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <h4><i class="icon fa fa-check"></i> Sukses!!</h4>
+          {{ session('pesan') }}
+        </div>
+      </div>
     </div>
 @endif
 

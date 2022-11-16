@@ -2,13 +2,15 @@
 
 @section('content')
 @section('title', 'Edit Kartu Keluarga')
-<form action="" method="post">
+
+<form action="/kartukeluarga/update/{{ $kartu_keluarga->nomor_keluarga }}" method="POST" enctype="multipart/form-data">
+  @csrf
   <h3>A. Data Pribadi</h3>
   <table class="table table-striped table-middle">
     <tr>
       <th width="20%">Nomor Kartu Keluarga</th>
       <td width="1%">:</td>
-      <td><input type="text" class="form-control" name="nomor_keluarga" value="{{ $kartu_keluarga->nomor_keluarga }}"></td>
+      <td><input type="text" class="form-control" name="nomor_keluarga" value="{{ $kartu_keluarga->nomor_keluarga }}" required></td>
     </tr>
     <tr>
       <th>Kepala Keluarga</th>
@@ -17,7 +19,7 @@
         <select class="form-control selectlive" name="nik_kepala_keluarga" required>
           <option value="{{ $kartu_keluarga->nik_kepala_keluarga }}" selected>{{ $kartu_keluarga->nama_warga }}</option>
           @foreach ($data_warga as $warga)  
-           <option value="{{ $kartu_keluarga->nomor_keluarga }}">
+           <option value="{{ $warga->nik_warga }}">
            {{ $warga->nama_warga }} (NIK: {{ $warga->nik_warga }})
           </option>
           @endforeach 

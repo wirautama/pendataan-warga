@@ -62,4 +62,8 @@ class WargaModel extends Model
     public function deleteData($nik_warga){
         DB::table('warga')->where('nik_warga', $nik_warga)->delete();
     }
+
+    public function countData() {
+        DB::table('warga')->count();
+    }
 }

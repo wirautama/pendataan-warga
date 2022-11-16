@@ -4,13 +4,19 @@
 @section('title', 'Dashboard')
 <section class="content">
   <!-- Small boxes (Stat box) -->
-  <div class="row">
-    @if(session()->has('success'))
+  @if(session()->has('success'))
+    <div class="row">
+      <div class="col-lg-4 col-xs-6">
       <div class="alert alert-success alert-dismissible">
-      {{ session('success') }}!! {{ auth()->user()->name }}</i>
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <h4><i class="icon fa fa-check"></i> Sukses!</h4>
+        {{ session('success') }}!! {{ auth()->user()->name }}
+      </div>
     </div>
-    @endif
+    </div>
+  @endif
+  <div class="row">
+
     <div class="col-lg-3 col-xs-6">
       <!-- small box -->
       <div class="small-box bg-aqua">
@@ -73,5 +79,8 @@
     <!-- ./col -->
   </div>
 
-  
+  <script>
+    $(document).ajaxStart(function() { Pace.restart(); });
+
+  </script>
 @endsection

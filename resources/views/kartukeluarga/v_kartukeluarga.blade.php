@@ -3,10 +3,15 @@
 @section('content')
 @section('title', 'Kartu Keluarga')
 @if(session('pesan'))
-    <div class="alert alert-success alert-dismissible">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <h4> Success! {{ session('pesan') }}. <i class="glyphicon glyphicon-ok"></i></h4>
+  <div class="row">
+    <div class="col-lg-4 col-xs-6">
+      <div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <h4><i class="icon fa fa-check"></i> Sukses!</h4>
+        {{ session('pesan') }}!!
+      </div>
     </div>
+  </div>
 @endif
 
 <table id="example1" class="table table-bordered table-striped">
@@ -45,7 +50,7 @@
                 <a href="/kartukeluarga/detail/{{ $data->nomor_keluarga }}"><i class="glyphicon glyphicon-sunglasses"></i> Detail</a>
               </li>
               <li>
-                <a href="cetak-show.php" target="_blank"><i class="glyphicon glyphicon-print"></i> Cetak</a>
+                <a href="/kartukeluarga/cetakkartukeluarga/{{ $data->nomor_keluarga }}"><i class="glyphicon glyphicon-print"></i> Cetak / Download PDF</a>
               </li>
               
               <li class="divider"></li>
@@ -71,6 +76,8 @@
     @endforeach
   </table>
   <a href="/kartukeluarga/add" class="btn btn-primary btn-md">Tambah Data</a>
+  {{-- <a href="/kartukeluarga/cetakkartukeluarga" class="btn btn-danger btn-md">Cetak / Prin</a> --}}
+  <a href="/kartukeluarga/cetaklaporankk" class="btn btn-danger btn-md"><i class="fa fa-download"></i> Cetak / Download Laporan Kartu Keluarga PDF</a>
   
   <br><br>
         <div class="well">

@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\AdminCategoryController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,8 +44,14 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/warga/edit/{nik_warga}', [WargaController::class, 'edit']);
     Route::post('/warga/update/{nik_warga}', [WargaController::class, 'update']);
     Route::get('/warga/delete/{nik_warga}', [WargaController::class, 'delete']);
-    Route::get('/warga/print', [WargaController::class, 'print'])->name('print');
-    Route::get('/warga/downloadpdf', [WargaController::class, 'downloadpdf']);
+
+    Route::get('/warga/cetaklaporan', [WargaController::class, 'cetaklaporan'])->name('cetaklaporan');
+    Route::get('/warga/cetaklaporan/printlaporan', [WargaController::class, 'printlaporan'])->name('printlaporan');
+    Route::get('/warga/cetaklaporan/downloadlaporanpdf', [WargaController::class, 'downloadlaporanpdf'])->name('downloadlaporanpdf');
+
+    Route::get('/warga/cetakwarga/{nik_warga}', [WargaController::class, 'cetakwarga'])->name('cetakwarga');
+    Route::get('/warga/printdatawarga/{nik_warga}', [WargaController::class, 'printdatawarga'])->name('printdatawarga');
+    Route::get('/warga/downloadpdfwarga/{nik_warga}', [WargaController::class, 'downloadpdfwarga'])->name('downloadpdfwarga');
 
 
     // Halaman KartuKeluarga
@@ -54,7 +61,18 @@ Route::group(['middleware' => ['auth']], function(){
     Route::post('/kartukeluarga/insert', [KartukeluargaController::class, 'insert']);
     Route::get('/kartukeluarga/editAnggota/{nomor_keluarga}', [KartukeluargaController::class, 'editAnggota']);
     Route::get('/kartukeluarga/edit/{nomor_keluarga}', [KartukeluargaController::class, 'edit']);
+    Route::post('/kartukeluarga/update/{nomor_keluarga}', [KartukeluargaController::class, 'update']);
     Route::get('/kartukeluarga/delete/{nomor_keluarga}', [KartukeluargaController::class, 'delete']);
+
+    Route::get('/kartukeluarga/cetakkartukeluarga/{nomor_keluarga}', [KartukeluargaController::class, 'cetakkartukeluarga']);
+    Route::get('/kartukeluarga/cetakkartukeluarga/print/{nomor_keluarga}', [KartukeluargaController::class, 'print'])->name('print');
+    Route::get('/kartukeluarga/cetakkartukeluarga/downloadkkpdf/{nomor_keluarga}', [KartukeluargaController::class, 'downloadkkpdf'])->name('downloadkkpdf');
+    
+    Route::get('/kartukeluarga/cetaklaporankk', [KartukeluargaController::class, 'cetaklaporankk'])->name('cetaklaporankk');
+    Route::get('/kartukeluarga/cetaklaporankk/printlaporankk', [KartukeluargaController::class, 'printlaporankk'])->name('printlaporankk');
+    Route::get('/kartukeluarga/cetaklaporankk/downloadlaporankkpdf', [KartukeluargaController::class, 'downloadlaporankkpdf'])->name('downloadlaporankkpdf');
+    
+
 
     // Halaman Mutasi
     Route::get('/mutasi', [MutasiController::class, 'index'])->name('mutasi');
@@ -75,8 +93,8 @@ Route::group(['middleware' => ['auth']], function(){
 
 
     // Halaman Admin
-    
 
+    Route::get('/profile', [ProfileController::class, 'index']);
 
 }); 
 

@@ -23,6 +23,8 @@ class RegistrationController extends Controller
            'name' => 'required|max:255',
            'level' => 'required',
            'email' => 'required|email:dns|unique:users',
+           'address' => 'required|max:255',
+           'phone' => 'required|min:10|max:13',
            'password' => 'required|min:5|max:255'
         ]);
         $validatedData['password'] = Hash::make($validatedData['password']);

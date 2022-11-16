@@ -10,8 +10,22 @@ use App\Models\KartukeluargaModel;
 class KartukeluargaModel extends Model
 {
     public $table = "kartu_keluarga";
-    
 
+    protected $fillable = [
+        'nomor_keluarga', 
+        'nik_kepala_keluarga', 
+        'alamat_keluarga', 
+        'desa_kelurahan_keluarga',
+        'kecamatan_keluarga',
+        'kabupaten_kota_keluarga',
+        'provinsi_keluarga',
+        'rt_keluarga',
+        'rw_keluarga',
+        'kode_pos_keluarga',
+        'negara_keluarga',
+        'id_user'
+    ];
+    
     public function allData()
     {
         return DB::table('kartu_keluarga')

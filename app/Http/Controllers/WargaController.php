@@ -57,7 +57,7 @@ class WargaController extends Controller
             'pekerjaan_warga' => Request()->pekerjaan_warga,
             'status_perkawinan_warga' => Request()->status_perkawinan_warga,
             'status_warga' => Request()->status_warga,
-            'id_user' => '1',
+            'id_user' => auth()->user()->id,
             'created_at' => Carbon::now()->toDateTimeString(),
             'updated_at' => Carbon::now()->toDateTimeString()
             
@@ -160,14 +160,79 @@ class WargaController extends Controller
         $data = [
          'warga' => $this->WargaModel->allData(),
         ];
-        $html = view('warga.v_printdatawarga', $data);
+        $html = view('warga.v_downloadpdf', $data);
 
         $dompdf = new Dompdf();
         $dompdf->loadHtml($html);
 
         $dompdf->setPaper('A4', 'landscape');
         $dompdf->render();
-        $dompdf->stream();
+        $dompdf->stream('Laporan-Data-Warga.pdf');
      }
+
+     public function cetakwarga($nik_warga) {
+        $data = [
+         'warga' => $this->WargaModel->detailData($nik_warga),
+        ];
+        return view('warga.v_cetakwarga', $data);
+        // $html = view('warga.cetakwarga', $data);
+
+        // $dompdf = new Dompdf();
+        // $dompdf->loadHtml($html);
+
+        // $dompdf->setPaper('A4', 'potrait');
+        // $dompdf->render();
+        // $dompdf->stream('download-warga.pdf');
+     }
+
+     public function printdatawarga($nik_warga){
+        $data = [
+            'warga' => $this->WargaModel->detailData($nik_warga),
+           ];
+           return view('warga.printdatawarga', $data);
+     }
+
+     public function downloadpdfwarga($nik_warga) {
+        $data = [
+            'warga' => $this->WargaModel->detailData($nik_warga),
+           ];
+           $html = view('warga.downloadpdfwarga', $data);
+   
+           $dompdf = new Dompdf();
+           $dompdf->loadHtml($html);
+   
+           $dompdf->setPaper('A4', 'potrait');
+           $dompdf->render();
+           $dompdf->stream('Download-Data-Warga.pdf');
+     }
+
+     public function cetaklaporan() {
+        $data = [
+            'warga' => $this->WargaModel->allData(),
+        ];
+        return view('warga.v_cetaklaporan', $data);
+     }
+
+     public function downloadlaporanpdf() {
+        $data = [
+            'warga' => $this->WargaModel->allData(),
+           ];
+           $html = view('warga.downloadlaporanpdf', $data);
+   
+           $dompdf = new Dompdf();
+           $dompdf->loadHtml($html);
+   
+           $dompdf->setPaper('A4', 'landscape');
+           $dompdf->render();
+           $dompdf->stream('Download-Laporan-Warga.pdf');
+     }
+
+     public function printlaporan() {
+        $data = [
+            'warga' => $this->WargaModel->allData(),
+        ];
+        return view('warga.printlaporan', $data);
+     }
+
 }
  
