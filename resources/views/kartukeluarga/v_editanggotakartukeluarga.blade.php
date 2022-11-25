@@ -6,7 +6,7 @@
   <tr>
     <th width="20%">Nomor Kartu Keluarga</th>
     <td width="1%">:</td>
-    <td>{{ $kartu_keluarga->nomor_keluarga }}</td>
+    <td name="nomor_keluarga">{{ $kartu_keluarga->nomor_keluarga }}</td>
   </tr>
   <tr>
     <th>Kepala Keluarga</th>
@@ -21,7 +21,7 @@
 </table>
 
 <h3>Daftar Nama Warga</h3>
-<form action="/kartukeluarga/updateAnggota/{{ $kartu_keluarga->nomor_keluarga }}" method="post">
+<form action="/kartukeluarga/insertAnggota/{{$kartu_keluarga->nomor_keluarga}}" method="post">
   @csrf
   <table id="example1" class="table table-bordered table-striped">
     <tr>
@@ -46,6 +46,7 @@
       </td>
     </tr>
   </table>
+</form>
   
   <table id="example1" class="table table-bordered table-striped">
     <thead>
@@ -90,7 +91,7 @@
               <li class="divider"></li>
               <li>
                 <a href="/warga/hapus/{{ $anggota->nik_warga }}" data-toggle="modal" data-target="#delete{{ $anggota->nik_warga }}">
-                  <i class="glyphicon glyphicon-trash"></i> Hapus
+                  <i class="glyphicon glyphicon-trash"></i> Hapus dari anggota
                 </a>
               </li>
             </ul>
@@ -103,7 +104,7 @@
 </form>
 
 <br><br>
-<a href="/kartukeluarga" class="btn btn-succes">Kembali</a>
+<a href="/kartukeluarga" class="btn btn-success btn-lg"> Kembali</a>
 
 
 

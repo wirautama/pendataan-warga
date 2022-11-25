@@ -41,7 +41,7 @@
             <td>{{ $data->nama_warga }}</td>
             <td>{{ $data->jenis_kelamin_warga }}</td>
             <td>{{ $data->tanggal_lahir_warga }}</td> 
-            <td></td>
+            <td>{{ $data->usia_warga }} Tahun</td>
             <td>{{ $data->pendidikan_terakhir_warga }}</td>
             <td>{{ $data->pekerjaan_warga }}</td>
             <td>{{ $data->status_perkawinan_warga }}</td>
@@ -82,25 +82,26 @@
         </tbody>
       </table>
 
+      @can('Admin')
       <a href="/warga/add" class="btn btn-success btn-md"><i class="fa fa-plus"></i> Tambah Data</a>
       <a href="/warga/cetaklaporan" class="btn btn-danger btn-md"><i class="fa fa-download"></i> Cetak / Download Laporan Warga PDF</a>
       <br><br>
-
+      @endcan
       
 
 <div class="well">
   <dl class="dl-horizontal">
     <dt>Total Warga</dt>
-    <dd> orang</dd>
+    <dd>{{ $hitungwarga }} orang</dd>
 
     <dt>Jumlah Laki-laki</dt>
-    <dd> orang</dd>
+    <dd>{{ $laki }} orang</dd>
 
     <dt>Jumlah Perempuan</dt>
-    <dd> orang</dd>
+    <dd>{{ $perempuan }} orang</dd>
 
     <dt>Warga < 17 tahun</dt>
-    <dd> orang</dd>
+    <dd>orang</dd>
 
     <dt>Warga >= 17 tahun</dt>
     <dd> orang</dd>

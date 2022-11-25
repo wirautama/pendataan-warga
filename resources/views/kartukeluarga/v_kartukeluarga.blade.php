@@ -21,6 +21,7 @@
         <th>Nomor KK</th>
         <th>Kepala Keluarga</th>
         <th>NIK Kepala Keluarga</th>
+        {{-- <th>Anggota Keluarga</th> --}}
         <th>Alamat</th>
         <th>RT</th>
         <th>RW</th>
@@ -36,6 +37,7 @@
         <td>{{ $data->nomor_keluarga }}</td>
         <td>{{ $data->nama_warga }}</td>
         <td>{{ $data->nik_kepala_keluarga }}</td>
+        {{-- <td>{{ $jumlah[''] }}</td> --}}
         <td>{{ $data->alamat_keluarga }}</td>
         <td>{{ $data->rt_keluarga }}</td>
         <td>{{ $data->rw_keluarga }}</td>
@@ -75,15 +77,16 @@
     {{-- @endforeach --}}
     @endforeach
   </table>
+
+  @can('Admin')
   <a href="/kartukeluarga/add" class="btn btn-success btn-md"><i class="fa fa-plus"></i> Tambah Data</a>
-  {{-- <a href="/kartukeluarga/cetakkartukeluarga" class="btn btn-danger btn-md">Cetak / Prin</a> --}}
   <a href="/kartukeluarga/cetaklaporankk" class="btn btn-danger btn-md"><i class="fa fa-download"></i> Cetak / Download Laporan Kartu Keluarga PDF</a>
-  
+  @endcan
   <br><br>
         <div class="well">
             <dl class="dl-horizontal">
             <dt>Total Kartu Keluarga</dt>
-            <dd> keluarga</dd>
+            <dd>{{ $hitungkeluarga }} keluarga</dd>
             </dl>
         </div>
 

@@ -88,6 +88,15 @@
         {{-- <span class="glyphicon glyphicon-envelope form-control-feedback"></span> --}}
       </div>
       <div class="form-group has-feedback">
+        <input type="file" id="image" class="form-control @error('image') is-invalid  @enderror"  placeholder="Foto Profil" name="image" required>
+        @error('image')
+        <div class="invalid-feedback">
+          {{ $message }}
+        </div>
+        @enderror
+        {{-- <span class="glyphicon glyphicon-envelope form-control-feedback"></span> --}}
+      </div>
+      <div class="form-group has-feedback">
         <input type="password" id="password" class="form-control @error('password') is-invalid  @enderror" placeholder="Password" name="password" required>
         {{-- <span class="glyphicon glyphicon-lock form-control-feedback"></span> --}}
         @error('password')

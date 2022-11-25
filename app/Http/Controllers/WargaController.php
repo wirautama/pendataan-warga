@@ -12,11 +12,20 @@ class WargaController extends Controller
     public function __construct()
     {
         $this->WargaModel = new WargaModel();
+        
     }
 
     public function index(){
+        // $year = Carbon::now()->format('Y');
         $data = [
-            'warga' => $this->WargaModel->allData(),
+            // 'warga' => WargaModel::all(),
+            'warga' => DB::select(DB::raw("SELECT *, TIMESTAMPDIFF(YEAR, `tanggal_lahir_warga`, CURDATE()) AS usia_warga FROM warga")),
+            'hitungwarga' => WargaModel::count(),
+            'laki' => WargaModel::where('jenis_kelamin_warga', 'L')->count(),
+            'perempuan' => WargaModel::where('jenis_kelamin_warga', 'P')->count(),
+            // 'lebihdari17' => WargaModel::where('tanggal_lahir_warga', '>=', date('Y-m-d'))->count(),
+            //kd17 =  "SELECT COUNT(*) AS total FROM warga WHERE TIMESTAMPDIFF(YEAR, tanggal_lahir_warga, CURDATE()) < 17 AND tanggal_lahir_warga != '0000-00-00'";
+            // 'usia_warga' => WargaModel::raw('TIMESTAMPDIFF(year, startDateTime, endDateTime) as duration')
         ];
         return view('warga.v_datawarga', $data);
     }
@@ -36,7 +45,30 @@ class WargaController extends Controller
         return view('warga.v_addwarga');
     }
 
-    public function insert(){
+    public function insert(Request $request){
+        $validated = $request->validate([
+            'nik_warga' => 'required|unique:warga|min:13|max:20',
+            'nama_warga' => 'required|min:5|max:255',
+            'tempat_lahir_warga' => 'required|min:5|max:255',
+            'tanggal_lahir_warga' => 'required',
+            'jenis_kelamin_warga' => 'required',
+            'alamat_ktp_warga' => 'required',
+            'alamat_warga' => 'required',
+            'desa_kelurahan_warga' => 'required',
+            'kecamatan_warga' => 'required',
+            'kabupaten_kota_warga' => 'required',
+            'provinsi_warga' => 'required',
+            'negara_warga' => 'required',
+            'rt_warga' => 'required',
+            'rw_warga' => 'required',
+            'agama_warga' => 'required',
+            'pendidikan_terakhir_warga' => 'required',
+            'pekerjaan_warga' => 'required|min:5|max:255',
+            'status_perkawinan_warga' => 'required',
+            'status_warga' => 'required', 
+            
+        ]);
+
         $data = [
             'nik_warga' => Request()->nik_warga,
             'nama_warga' => Request()->nama_warga,
@@ -57,11 +89,11 @@ class WargaController extends Controller
             'pekerjaan_warga' => Request()->pekerjaan_warga,
             'status_perkawinan_warga' => Request()->status_perkawinan_warga,
             'status_warga' => Request()->status_warga,
-            'id_user' => auth()->user()->id,
+            'id_user' => '1',
             'created_at' => Carbon::now()->toDateTimeString(),
             'updated_at' => Carbon::now()->toDateTimeString()
-            
-        ];
+
+        ];    
         $this->WargaModel->addData($data);
         return redirect()->route('warga')->with('pesan', 'Data Berhasil Di Tambahkan');
     }
@@ -78,29 +110,28 @@ class WargaController extends Controller
     }
 
     public function update($nik_warga){
-        // Request()->validate([
-        //     'nik_warga' => 'required',
-        //     'nama_warga' => 'required',
-        //     'tempat_lahir_warga' => 'required',
-        //     'tanggal_lahir_warga' => 'required',
-        //     'jenis_kelamin_warga' => 'required',
-        //     'alamat_ktp_warga' => 'required',
-        //     'alamat_warga' => 'required',
-        //     'desa_kelurahan_warga' => 'required',
-        //     'kecamatan_warga' => 'required',
-        //     'kabupaten_kota_warga' => 'required',
-        //     'provinsi_warga' => 'required',
-        //     'negara_warga' => 'required',
-        //     'rt_warga' => 'required',
-        //     'rw_warga' => 'required',
-        //     'agama_warga' => 'required',
-        //     'pendidikan_terakhir_warga' => 'required',
-        //     'pekerjaan_warga' => 'required',
-        //     'status_perkawinan_warga' => 'required',
-        //     'status_warga' => 'required',
+        Request()->validate([
+            'nik_warga' => 'required|min:13|max:20',
+            'nama_warga' => 'required|min:5|max:255',
+            'tempat_lahir_warga' => 'required|min:5|max:255',
+            'tanggal_lahir_warga' => 'required',
+            'jenis_kelamin_warga' => 'required',
+            'alamat_ktp_warga' => 'required',
+            'alamat_warga' => 'required',
+            'desa_kelurahan_warga' => 'required',
+            'kecamatan_warga' => 'required',
+            'kabupaten_kota_warga' => 'required',
+            'provinsi_warga' => 'required',
+            'negara_warga' => 'required',
+            'rt_warga' => 'required',
+            'rw_warga' => 'required',
+            'agama_warga' => 'required',
+            'pendidikan_terakhir_warga' => 'required',
+            'pekerjaan_warga' => 'required|min:5|max:255',
+            'status_perkawinan_warga' => 'required',
+            'status_warga' => 'required',
             
-
-        // ]);
+        ]);
         $data = [
             'nik_warga' => Request()->nik_warga,
             'nama_warga' => Request()->nama_warga,
@@ -144,7 +175,40 @@ class WargaController extends Controller
         return view('mutasi.v_addmutasi', $data);
     }
 
-    public function addMutasi($nik_warga) {
+    public function addMutasi(Request $request,$nik_warga) {
+        $validated = $request()->validate([
+            'nik_mutasi' => 'required|min:13|max:20',
+            'nama_mutasi' => 'required|min:5|max:255',
+            'tempat_lahir_mutasi' => 'required|min:5|max:255',
+            'tanggal_lahir_mutasi' => 'required',
+            'jenis_kelamin_mutasi' => 'required',
+            'alamat_ktp_mutasi' => 'required|min:5|max:255',
+            'alamat_mutasi' => 'required|min:5|max:255',
+            'desa_kelurahan_mutasi' => 'required|min:5|max:255',
+            'kecamatan_mutasi' => 'required|min:5|max:255',
+            'kabupaten_kota_mutasi' => 'required|min:5|max:255',
+            'provinsi_mutasi' => 'required|min:5|max:255',
+            'negara_mutasi' => 'required|min:5|max:255',
+            'rt_mutasi' => 'required',
+            'rw_mutasi' => 'required',
+            'agama_mutasi' => 'required',
+            'pendidikan_terakhir_mutasi' => 'required',
+            'pekerjaan_mutasi' => 'required|min:5|max:255',
+            'status_perkawinan_mutasi' => 'required',
+            'status_mutasi' => 'required'
+        ]);
+        $data = [
+            'alamat_ktp_mutasi' => Request()->alamat_mutasi,
+            'alamat_mutasi' => Request()->alamat_mutasi,
+            'desa_kelurahan_mutasi' => Request()->desa_kelurahan_mutasi,
+            'kecamatan_mutasi' => Request()->kecamatan_mutasi,
+            'kabupaten_kota_mutasi' => Request()->kabupaten_kota_mutasi,
+            'provinsi_mutasi' => Request()->provinsi_mutasi,
+            'negara_mutasi' => Request()->negara_mutasi,
+            'rt_mutasi' => Request()->rt_mutasi,
+            'rw_mutasi' => Request()->rw_mutasi,
+        ];
+
         $this->MutasiModel->addData($data);
         return redirect()->route('warga')->with('pesan', 'Data Berhasil Di Mutasi');
     }
@@ -175,14 +239,7 @@ class WargaController extends Controller
          'warga' => $this->WargaModel->detailData($nik_warga),
         ];
         return view('warga.v_cetakwarga', $data);
-        // $html = view('warga.cetakwarga', $data);
-
-        // $dompdf = new Dompdf();
-        // $dompdf->loadHtml($html);
-
-        // $dompdf->setPaper('A4', 'potrait');
-        // $dompdf->render();
-        // $dompdf->stream('download-warga.pdf');
+        
      }
 
      public function printdatawarga($nik_warga){

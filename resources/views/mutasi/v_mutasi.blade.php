@@ -54,7 +54,7 @@
                 <a href="/mutasi/detail/{{ $data->nik_mutasi }}"><i class="glyphicon glyphicon-sunglasses"></i> Detail</a>
               </li>
               <li>
-                <a href="cetak-show.php" target="_blank"><i class="glyphicon glyphicon-print"></i> Cetak</a>
+                <a href="/mutasi/cetakmutasi/{{$data->nik_mutasi}}"><i class="glyphicon glyphicon-print"></i> Download PDF / Print</a>
               </li>
               <li class="divider"></li>
               <li>
@@ -71,21 +71,21 @@
     @endforeach
   </table>
 
-  <a href="/mutasi/add" class="btn btn-success btn-md"><i class="fa fa-plus"></i> Tambah Data</a>
+  @can('Admin')
   <a href="/mutasi/cetaklaporanmutasi" class="btn btn-danger btn-md"><i class="fa fa-download"></i> Cetak / Download Laporan Kartu Keluarga PDF</a>
-
+  @endcan
   <br><br>
 
 <div class="well">
   <dl class="dl-horizontal">
     <dt>Total Mutasi</dt>
-    <dd> orang</dd>
+    <dd>{{ $hitungmutasi }} orang</dd>
 
     <dt>Jumlah Laki-laki</dt>
-    <dd> orang</dd>
+    <dd>{{ $laki }} orang</dd>
 
     <dt>Jumlah Perempuan</dt>
-    <dd> orang</dd>
+    <dd>{{ $perempuan }} orang</dd>
 
     <dt>Warga < 17 tahun</dt>
     <dd> orang</dd>

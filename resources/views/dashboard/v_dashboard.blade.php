@@ -47,6 +47,7 @@
       </div>
     </div>
     <!-- ./col -->
+    @can('Admin')
     <div class="col-lg-3 col-xs-6">
       <!-- small box -->
       <div class="small-box bg-yellow">
@@ -61,6 +62,7 @@
         <a href="/user" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
       </div>
     </div>
+    @endcan
     <!-- ./col -->
     <div class="col-lg-3 col-xs-6">
       <!-- small box -->

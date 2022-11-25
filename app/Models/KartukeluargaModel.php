@@ -10,6 +10,7 @@ use App\Models\KartukeluargaModel;
 class KartukeluargaModel extends Model
 {
     public $table = "kartu_keluarga";
+    protected $primaryKey = "nomor_keluarga";
 
     protected $fillable = [
         'nomor_keluarga', 
@@ -55,7 +56,7 @@ class KartukeluargaModel extends Model
          
 
 
-    public function editData($nomor_keluarga){
+    public function editData($nomor_keluarga, $data){
         DB::table('kartu_keluarga')->where('nomor_keluarga', $nomor_keluarga)->update($data);
     }
 
@@ -65,8 +66,8 @@ class KartukeluargaModel extends Model
     }
     // "INSERT INTO warga_has_kartu_keluarga (nik_warga, nomor_keluarga) VALUES ('$nik_warga', '$nomor_keluarga');";
 
-    public function updateAnggota($nomor_keluarga, $data){
-        DB::table('warga_has_kartu_keluarga')->insert($data);
+    public function insertAnggota(request $request, $nomor_keluarga){
+        DB::table('warga_has_kartu_keluarga')->insert($request)->where('nomor_keluarga', '=', $nomor_keluarga);
     }
 
     public function deleteData($nomor_keluarga){

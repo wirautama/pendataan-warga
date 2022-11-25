@@ -67,20 +67,24 @@
       <div class="form-group has-feedback">
         <input type="email" class="form-control @error('email') is-invalid  @enderror" placeholder="Username" name="email" value="{{ old('email') }}">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
-        @error('email')
-        <div class="invalid-feedback">
-          {{ $message }}
-        </div>
-        @enderror
+          <div class="text-danger">
+            @error('email')
+              <div class="invalid-feedback">
+                {{ $message }}
+              </div>
+            @enderror
+          </div>
       </div>
       <div class="form-group has-feedback">
         <input type="password" class="form-control @error('password') is-invalid  @enderror" placeholder="Password" name="password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-        @error('password')
-        <div class="invalid-feedback">
-          {{ $message }}
-        </div>
-        @enderror
+          <div class="text-danger">
+            @error('password')
+              <div class="invalid-feedback">
+                {{ $message }}
+              </div>
+            @enderror
+          </div>
       </div>
       <div class="row">
         <div class="col-xs-8">

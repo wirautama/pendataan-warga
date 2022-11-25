@@ -6,76 +6,42 @@
   @csrf
     <h3>A. Data Pribadi</h3>
     <table class="table table-striped table-middle">
-      <tr> 
+      <tr>
         <th width="20%">Nama User</th>
         <td width="1%">:</td>
-        <td><input type="text" class="form-control @error('nama_user') is-invalid @enderror" value="{{ old('nama_user') }}" name="nama_user" required></td>
+        <td><input type="text" value="" name="name" placeholder="Nama Lengkap" class="form-control" required></td>
       </tr>
       <tr>
-        <th>Username</th>
-        <td>:</td>
-        <td><input type="text" class="form-control @error('username_user') is-invalid @enderror" value="{{ old('username_warga') }}" name="username_user" required></td>
-      </tr>
-      <tr>
-        <th>Password</th>
-        <td>:</td>
-        <td><input type="password" class="form-control @error('password_user') is-invalid @enderror" value="{{ old('password_user') }}" name="password_user" required></td>
-      </tr>
-      {{-- <tr>
-        <th>Keterangan</th>
-        <td>:</td>
-        <td><textarea class="form-control @error('keterangan_user') is-invalid @enderror" value="{{ old('keterangan_user') }}" name="keterangan_user"></textarea></td>
-      </tr> --}}
-      <tr>
-        <th>Status</th>
+        <th>Level</th>
         <td>:</td>
         <td>
-          <select class="form-control selectpicker @error('status_user') is-invalid @enderror" name="status_user"  required>
-            <option value="{{ old('status_user') }}" selected disabled>- pilih -{{ old('status_user') }}</option>
+          <select class="form-control selectpicker" name="level" required>
+            <option value="" selected>-Pilih-</option>
             <option value="Admin">Admin</option>
             <option value="RT">RT</option>
             <option value="RW">RW</option>
           </select>
         </td>
       </tr>
-    </table>
-    
-    <h3>B. Data Alamat</h3>
-    <table class="table table-striped table-middle">
       <tr>
-        <th width="20%">Desa/Kelurahan</th>
-        <td width="1%">:</td>
-        <td><input type="text" class="form-control @error('desa_kelurahan_user') is-invalid @enderror" name="desa_kelurahan_user"  value="BETRO" required readonly></td>
+        <th>Email</th>
+        <td>:</td>
+        <td><input type="email" value="" name="email" placeholder="example@email.com" class="form-control" required></td>
       </tr>
       <tr>
-        <th>Kecamatan</th>
+        <th>Alamat</th>
         <td>:</td>
-        <td><input type="text" class="form-control @error('kecamatan_warga') is-invalid @enderror" name="kecamatan_user" value="SEDATI" required readonly></td>
+        <td><textarea name="address" value="{{ old('address') }}" class="form-control @error('address') is-invalid @enderror" placeholder="Alamat Lengkap"></textarea></td>
       </tr>
       <tr>
-        <th>Kabupaten/Kota</th>
+        <th>No. Handphone</th>
         <td>:</td>
-        <td><input type="text" class="form-control @error('kabupaten_kota_user') is-invalid @enderror" name="kabupaten_kota_user" value="SIDOARJO" required readonly></td>
+        <td><input type="number" value="" name="phone" placeholder="Nomor HP" class="form-control @error('address') is-invalid @enderror"></td>
       </tr>
       <tr>
-        <th>Provinsi</th>
+        <th>Password</th>
         <td>:</td>
-        <td><input type="text" class="form-control @error('provinsi_user') is-invalid @enderror" name="provinsi_user" value="JAWA TIMUR" required readonly></td>
-      </tr>
-      <tr>
-        <th>Negara</th>
-        <td>:</td>
-        <td><input type="text" class="form-control @error('negara_user') is-invalid @enderror" name="negara_user" value="{{ old('negara_warga') }}" required></td>
-      </tr>
-      <tr>
-        <th>RT</th>
-        <td>:</td>
-        <td><input type="text" class="form-control @error('rt_user') is-invalid @enderror" name="rt_user" value="{{ old('rt_warga') }}" required></td>
-      </tr>
-      <tr>
-        <th>RW</th>
-        <td>:</td>
-        <td><input type="text" class="form-control @error('rw_user') is-invalid @enderror" name="rw_user" value="{{ old('rw_user') }}"  required></td>
+        <td><input type="password" value="" name="password" placeholder="Password" class="form-control @error('password') is-invalid @enderror"></td>
       </tr>
     </table>
     

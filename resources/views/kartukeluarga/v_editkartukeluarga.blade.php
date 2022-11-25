@@ -81,8 +81,6 @@
     <i class="glyphicon glyphicon-floppy-save"></i> Simpan
   </button>
   <a href="/kartukeluarga" class="btn btn-success btn-lg">Kembali</a>
-  
-  <input type="hidden" name="nomor_keluarga" value="">
   </form>
   
 @endsection

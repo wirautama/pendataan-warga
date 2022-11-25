@@ -3,6 +3,17 @@
 @section('content')
 @section('title', 'Profile')
 
+@if(session('message'))
+    <div class="row">
+      <div class="col-lg-4 col-xs-8">
+        <div class="alert alert-success alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <h4><i class="icon fa fa-check"></i> Sukses!!</h4>
+          {{ session('message') }}
+        </div>
+      </div>
+    </div>
+@endif
 
     <!-- Main content -->
     <section class="content">
@@ -13,7 +24,7 @@
           <!-- Profile Image -->
           <div class="box box-primary">
             <div class="box-body box-profile">
-              
+              <img class="image-circle img-responsive img-rounded"  src="{{ Storage::url(auth()->user()->image) }}" alt="User profile picture">
               <h3 class="profile-username text-center">{{ auth()->user()->name }}</h3>
 
               <p class="text-muted text-center">{{ auth()->user()->level }}</p>
@@ -47,60 +58,64 @@
         <div class="col-md-9">
           <div class="nav-tabs-custom">
             <div class="tab-content">
-                <h3 class="text-center">Setting</h3>
+                <h3 class="text-center">Ubah Password</h3>
                 <div class="post clearfix">
                   
                     <div class="tab-pane" id="settings">
-                        <form class="form-horizontal">
+                        <form action="{{ route('ubahpassword') }}" class="form-horizontal" method="POST">
+                          @csrf
                           <div class="form-group">
-                            <label for="inputName" class="col-sm-2 control-label">Name</label>
+                            <label for="inputName" class="col-sm-2 control-label">Password Lama</label>
                             <div class="col-sm-10">
-                              <input type="email" class="form-control" id="inputName" placeholder="Name">
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label for="inputEmail" class="col-sm-2 control-label">Email</label>
-        
-                            <div class="col-sm-10">
-                              <input type="email" class="form-control" id="inputEmail" placeholder="Email">
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label for="inputName" class="col-sm-2 control-label">Name</label>
-        
-                            <div class="col-sm-10">
-                              <input type="text" class="form-control" id="inputName" placeholder="Name">
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
-        
-                            <div class="col-sm-10">
-                              <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label for="inputSkills" class="col-sm-2 control-label">Skills</label>
-        
-                            <div class="col-sm-10">
-                              <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                              <div class="checkbox">
-                                <label>
-                                  <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
-                                </label>
+                              <input type="password" class="form-control @error('password_lama') is-invalid @enderror" id="inputName" name="password_lama" placeholder="Password Lama">
+                              <div class="text-danger">
+                                @error('password_lama')
+                                  <div class="invalid-feedback">
+                                    {{ $message }}
+                                  </div>
+                                @enderror
                               </div>
                             </div>
                           </div>
+                          <div class="tab-pane" id="settings">
+                            <form class="form-horizontal">
+                              <div class="form-group">
+                                <label for="inputName" class="col-sm-2 control-label">Password Baru</label>
+                                <div class="col-sm-10">
+                                  <input type="password" class="form-control @error('password_baru') is-invalid @enderror" id="inputName" placeholder="Password Baru" name="password_baru">
+                                  <div class="text-danger">
+                                    @error('password_baru')
+                                      <div class="invalid-feedback">
+                                        {{ $message }}
+                                      </div>
+                                    @enderror
+                                  </div>
+                                </div>
+                              </div>
+    
+                          <div class="form-group">
+                            <label for="inputEmail" class="col-sm-2 control-label">Konfirmasi Password</label>
+                            <div class="col-sm-10">
+                              <input type="password" class="form-control @error('konfirmasi_password') is-invalid @enderror" id="inputEmail" name="konfirmasi_password" placeholder="Konfirmasi Password">
+                              <div class="text-danger">
+                                @error('konfirmasi_password')
+                                  <div class="invalid-feedback">
+                                    {{ $message }}
+                                  </div>
+                                @enderror
+                              </div>
+                            </div>
+                          </div>
+                          
                           <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
-                              <button type="submit" class="btn btn-danger">Submit</button>
+                              <button type="submit" class="btn btn-primary">Ubah Password</button>
                             </div>
                           </div>
                         </form>
+                        
                 </div>
-                </div>         
+                </div>
+
+                
 @endsection

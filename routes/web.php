@@ -59,8 +59,9 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/kartukeluarga/detail/{nomor_keluarga}', [KartukeluargaController::class, 'detail']);
     Route::get('/kartukeluarga/add', [KartukeluargaController::class, 'add']);
     Route::post('/kartukeluarga/insert', [KartukeluargaController::class, 'insert']);
+    // Route::post('/kartukeluarga/addAnggota', [KartukeluargaController::class, 'Addanggota']);
     Route::get('/kartukeluarga/editAnggota/{nomor_keluarga}', [KartukeluargaController::class, 'editAnggota']);
-    Route::post('/kartukeluarga/updateAnggota/{nomor_keluarga}', [KartukeluargaController::class, 'updateAnggota'])->name('updateAnggota');
+    Route::post('/kartukeluarga/insertAnggota/{nomor_keluarga}', [KartukeluargaController::class, 'insertAnggota'])->name('insertAnggota');
     Route::get('/kartukeluarga/edit/{nomor_keluarga}', [KartukeluargaController::class, 'edit']);
     Route::post('/kartukeluarga/update/{nomor_keluarga}', [KartukeluargaController::class, 'update']);
     Route::get('/kartukeluarga/delete/{nomor_keluarga}', [KartukeluargaController::class, 'delete']);
@@ -84,22 +85,28 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/mutasi/cetaklaporanmutasi', [MutasiController::class, 'cetaklaporanmutasi']);
     Route::get('/mutasi/cetaklaporanmutasi/downloadlaporanmutasi', [MutasiController::class, 'downloadlaporanmutasi']);
     Route::get('/mutasi/cetaklaporanmutasi/printlaporanmutasi', [MutasiController::class, 'printlaporanmutasi']);
-
+    Route::get('/mutasi/cetakmutasi/{nik_mutasi}', [MutasiController::class, 'cetakmutasi']);
+    Route::get('/mutasi/cetakmutasi/downloadmutasi/{nik_mutasi}', [MutasiController::class, 'downloadmutasi']);
+    Route::get('/mutasi/cetakmutasi/printmutasi/{nik_mutasi}', [MutasiController::class, 'printmutasi']);
 
     // Halaman User
     Route::resource('/user', AdminCategoryController::class)->except('show')->middleware('Admin');
     Route::get('/user', [UserController::class, 'index'])->name('user');
-    Route::get('/user/detail/{id_user}', [UserController::class, 'detail']);
+    Route::get('/user/detail/{id}', [UserController::class, 'detail']);
     Route::get('/user/add', [UserController::class, 'add']);
     Route::post('/user/insert', [UserController::class, 'insert']);
-    Route::get('/user/edit/{id_user}', [UserController::class, 'edit']);
-    Route::post('/user/update/{id_user}', [UserController::class, 'update']);
-    Route::get('/user/delete/{id_user}', [UserController::class, 'delete']);
+    Route::get('/user/edit/{id}', [UserController::class, 'edit']);
+    Route::post('/user/update', [UserController::class, 'update']);
+    Route::get('/user/delete/{id}', [UserController::class, 'delete']);
+    Route::get('/user/cetaklaporanuser', [UserController::class, 'cetaklaporanuser']);
+    Route::get('/user/cetaklaporanuser/printlaporanuser', [UserController::class, 'printlaporanuser']);
+    Route::get('/user/cetaklaporanuser/downloadlaporanuser', [UserController::class, 'downloadlaporanuser']);
 
 
     // Halaman Admin
 
     Route::get('/profile', [ProfileController::class, 'index']);
+    Route::post('/profile/updatepassword', [ProfileController::class, 'ubahPassword'])->name('ubahpassword');
 
 }); 
 

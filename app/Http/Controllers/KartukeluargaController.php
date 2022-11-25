@@ -25,6 +25,7 @@ class KartukeluargaController extends Controller
     public function index() {
         $data = [
             'kartu_keluarga' => $this->KartukeluargaModel->allData(),
+            'hitungkeluarga' => KartukeluargaModel::count(),
         ];
         return view('kartukeluarga.v_kartukeluarga', $data);
         // dd($data);
@@ -85,16 +86,24 @@ class KartukeluargaController extends Controller
             'rt_keluarga' => Request()->rt_keluarga,
             'rw_keluarga' => Request()->rw_keluarga,
             'kode_pos_keluarga' => Request()->kode_pos_keluarga,
-            'id_user' => auth()->user()->id,
+            'id_user' => '1',
             'updated_at' => Carbon::now()->toDateTimeString()
 
         ];
-        // $this->KartukeluargaModel->editData($nomor_keluarga, $data);
-        // return redirect()->route('kartukeluarga')->with('pesan', 'Data Berhasil Di Update');
-        dd($data);
+        $this->KartukeluargaModel->editData($nomor_keluarga, $data);
+        return redirect()->route('kartukeluarga')->with('pesan', 'Data Berhasil Di Update');
+        // dd($data);
 
     }
 
+    // public function addAnggota($nomor_keluarga, $nik_warga){
+    //     $data = [
+    //         'warga' => WargaModel::where('nik_warga', '=', $nik_warga),
+    //         'kartukeluarga' => KartukeluargaModel::where('nomor_keluarga', '=', $nomor_keluarga)
+    //     ];
+    //     $this->KartukeluargaModel->addAnggota($nomor_keluarga, $data);
+    //     return redirect()->route('kartukeluarga')->with('pesan', 'Data Anggota Keluarga Berhasil Di Update');
+    // }
 
     public function editAnggota($nomor_keluarga) {
         if(!$this->KartukeluargaModel->detailData($nomor_keluarga)){
@@ -109,10 +118,22 @@ class KartukeluargaController extends Controller
         return view('kartukeluarga.v_editanggotakartukeluarga', $data);
     }
 
-    public function updateAnggota($nomor_keluarga) {
-        $cek = Warga_has_kartu_keluargaModel::count()->where('nik_warga', '=', $nik_warga AND 'nomor_keluarga', '=', $nomor_keluarga );
-        dd($cek);
-    }
+    public function insertAnggota(request $request, $nomor_keluarga) {
+        
+        $data = [
+            'warga' => Request()->nik_warga,
+            'nomor_keluarga' => DB::table('kartu_keluarga')->select('nomor_keluarga')->get()
+    ];
+        
+        //  DB::table('warga_has_kartu_keluarga')->insert('nik_warga', '=', $nik_warga, 'nomor_keluarga', '=', $nomor_keluarga);
+        //  $query = Warga_has_kartu_keluargaModel::insert('nik_warga','nomor_keluarga' ($nik_warga));
+        // $nomor_keluarga = KartukeluargaModel::find(1); 
+ 
+        Warga_has_kartu_keluargaModel::insert($data);
+
+        dd($data);
+     }
+    
 
     public function add(){
 
@@ -122,8 +143,21 @@ class KartukeluargaController extends Controller
         return view('kartukeluarga.v_addkartukeluarga', $data);
     }
 
-    public function insert() {
-    
+    public function insert(request $request) {
+        Request()->validate([
+            'nomor_keluarga' => 'required|unique:kartu_keluarga|min:16|max:20',
+            'nik_kepala_keluarga' => 'required|min:16|max:20',
+            'alamat_keluarga' => 'required',
+            'desa_kelurahan_keluarga' => 'required|min:5|max:255',
+            'kecamatan_keluarga' => 'required|min:5|max:255',
+            'kabupaten_kota_keluarga' => 'required|min:5|max:255',
+            'provinsi_keluarga' => 'required|min:5|max:255',
+            'negara_keluarga' => 'required|min:5|max:255',
+            'rt_keluarga' => 'required',
+            'rw_keluarga' => 'required',
+            'kode_pos_keluarga' => 'required|min:5|max:5',
+
+        ]);
         $data = [
             'nomor_keluarga' => Request()->nomor_keluarga,
             'nik_kepala_keluarga' => Request()->nik_kepala_keluarga,
@@ -136,10 +170,7 @@ class KartukeluargaController extends Controller
             'rt_keluarga' => Request()->rt_keluarga,
             'rw_keluarga' => Request()->rw_keluarga,
             'kode_pos_keluarga' => Request()->kode_pos_keluarga,
-            'negara_keluarga' => Request()->negara_keluarga,
-            'rt_keluarga' => Request()->rt_keluarga,
-            'rw_keluarga' => Request()->rw_keluarga,
-            'id_user' => auth()->user()->id,
+            'id_user' => '1',
             'created_at' => Carbon::now()->toDateTimeString(),
             'updated_at' => Carbon::now()->toDateTimeString()
             

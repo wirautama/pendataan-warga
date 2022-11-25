@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\WargaModel;
-use App\Models\UserModel;
+use App\Models\User;
 use App\Models\MutasiModel;
 use App\Models\KartukeluargaModel;
 use App\Http\Controllers\WargaController;
@@ -17,7 +17,7 @@ class DashboardController extends Controller
     public function index() {
         $warga = WargaModel::count();
         // $kartukeluarga = KartukeluargaModel::where('nomor_keluarga', '1')->count();
-        $user = UserModel::count();
+        $user = User::count();
         $mutasi = MutasiModel::count();
         $kartukeluarga = KartukeluargaModel::count();
         // $kartukeluarga = KartukeluargaModel::count();

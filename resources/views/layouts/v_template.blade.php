@@ -60,7 +60,13 @@
           </li>
           @auth
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i>  {{ auth()->user()->name }}<span class="caret"></span></a>
+            {{-- <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i>  {{ auth()->user()->name }}<span class="caret"></span></a>
+             --}}
+             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              {{-- <img src="{{ Storage::url(auth()->user()->image) }}" class="mx-auto d-block" weight="30" height="30"> --}}
+              <i class="fa fa-user"></i> 
+              <span class="hidden-xs">{{ auth()->user()->name }}</span>
+            </a>
             <ul class="dropdown-menu">
               <li><a href="/profile"><i class="glyphicon glyphicon-user"></i> Profile</a></li>
               <li role="separator" class="divider"></li>
@@ -83,7 +89,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="{{ asset('template/') }}/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="{{ Storage::url(auth()->user()->image) }}" class="mx-auto d-block" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>{{ auth()->user()->name }}</p>

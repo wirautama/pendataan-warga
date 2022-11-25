@@ -12,6 +12,10 @@ use App\Models\WargaModel;
 class Warga_has_kartu_keluargaModel extends Model
 {
     public $table = "warga_has_kartu_keluarga";
+    protected $fillable = [
+        'nik_warga',
+        'nomor_keluarga'
+    ];
 
     public function allData(){
         return DB::table('warga_has_kartu_keluarga')->get();

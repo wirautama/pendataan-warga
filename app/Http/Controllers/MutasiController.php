@@ -17,6 +17,9 @@ class MutasiController extends Controller
     public function index() {
         $data = [
             'mutasi' => $this->MutasiModel->allData(),
+            'hitungmutasi' => MutasiModel::count(),
+            'laki' => MutasiModel::where('jenis_kelamin_mutasi', 'L')->count(),
+            'perempuan' => MutasiModel::where('jenis_kelamin_mutasi', 'P')->count()
         ];
         return view('mutasi.v_mutasi', $data);
     }
@@ -96,5 +99,33 @@ class MutasiController extends Controller
             'mutasi' => $this->MutasiModel->allData(),
         ];
         return view('mutasi.printlaporanmutasi', $data);
+     }
+
+     public function cetakmutasi($nik_mutasi){
+        $data = [
+            'mutasi' => $this->MutasiModel->detailData($nik_mutasi),
+        ];
+        return view('mutasi.v_cetakmutasi', $data);
+    }
+
+    public function printmutasi($nik_mutasi) {
+        $data = [
+            'mutasi' => $this->MutasiModel->detailData($nik_mutasi),
+        ];
+        return view('mutasi.printmutasi', $data);
+    }
+
+    public function downloadmutasi($nik_warga) {
+        $data = [
+            'mutasi' => $this->MutasiModel->detailData($nik_warga),
+           ];
+           $html = view('mutasi.downloadmutasi', $data);
+   
+           $dompdf = new Dompdf();
+           $dompdf->loadHtml($html);
+   
+           $dompdf->setPaper('A4', 'potrait');
+           $dompdf->render();
+           $dompdf->stream('Download-Data-Mutasi.pdf');
      }
 }

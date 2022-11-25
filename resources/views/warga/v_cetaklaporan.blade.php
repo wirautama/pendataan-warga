@@ -1,7 +1,7 @@
 @extends('layouts.v_template')
 
 @section('content')
-@section('title', 'Cetak Laporan')
+@section('title', 'Cetak Laporan Warga')
 <div class="pad margin no-print">
     <div class="callout callout-info" style="margin-bottom: 0!important;">
       <h4><i class="fa fa-info"></i> Catatan:</h4>
