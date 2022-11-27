@@ -34,7 +34,7 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <!-- Site wrapper -->
 <div class="wrapper">
-
+  
   <header class="main-header">
     <!-- Logo -->
     <a href="{{ asset('template') }}/index2.html" class="logo">
@@ -111,6 +111,19 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
+      @if(session()->has('success'))
+    <div class="row">
+      <div class="col-lg-10 col-xs-4">
+      <div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <h4><i class="icon fa fa-check"></i> Sukses!!</h4>
+        {{ session('success') }} <b>{{ auth()->user()->name }}</b>, Anda Login sebagai <b>{{auth()->user()->level}}</b>.
+      </div>
+    </div>
+    </div>
+    {{-- <h4>Selamat Datang <b>{{auth()->user()->name}}</b>, Anda Login sebagai <b>{{Auth()user()->role}}</b>.</h4> --}}
+  @endif
+
       <h1>
         @yield('title')
         <small>semuanya di mulai disini</small>

@@ -104,7 +104,7 @@
     <dd>orang</dd>
 
     <dt>Warga >= 17 tahun</dt>
-    <dd> orang</dd>
+    <dd>  orang</dd>
   </dl>
 </div>
 

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\MutasiModel;
 use Carbon\Carbon;
 use Dompdf\Dompdf;
+use DB;
 
 class MutasiController extends Controller
 {
@@ -16,7 +17,7 @@ class MutasiController extends Controller
 
     public function index() {
         $data = [
-            'mutasi' => $this->MutasiModel->allData(),
+            'mutasi' => DB::select(DB::raw("SELECT *, TIMESTAMPDIFF(YEAR, `tanggal_lahir_mutasi`, CURDATE()) AS usia_mutasi FROM mutasi")),
             'hitungmutasi' => MutasiModel::count(),
             'laki' => MutasiModel::where('jenis_kelamin_mutasi', 'L')->count(),
             'perempuan' => MutasiModel::where('jenis_kelamin_mutasi', 'P')->count()

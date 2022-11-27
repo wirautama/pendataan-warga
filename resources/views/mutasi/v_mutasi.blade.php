@@ -38,7 +38,7 @@
         <td>{{ $data->nik_mutasi }}</td>
         <td>{{ $data->nama_mutasi }}</td>
         <td>{{ $data->jenis_kelamin_mutasi }}</td>
-        <td></td> 
+        <td>{{ $data->usia_mutasi }} Tahun</td> 
         <td>{{ $data->pendidikan_terakhir_mutasi }}</td>
         <td>{{ $data->pekerjaan_mutasi }}</td>
         <td>{{ $data->status_perkawinan_mutasi }}</td>

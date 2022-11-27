@@ -113,9 +113,64 @@
                             </div>
                           </div>
                         </form>
-                        
-                </div>
-                </div>
 
-                
+                        
+                      </div>
+
+
+                      <div class="col-md-9">
+                        <div class="nav-tabs-custom">
+                          <div class="tab-content">
+                              <h3 class="text-center">Ubah Foto Profil</h3>
+                              <div class="post clearfix">
+                                
+                                  <div class="tab-pane" id="settings">
+                                      <form action="/profile/ubahimage" class="form-horizontal" method="POST" enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="form-group">
+                                          <label for="inputName" class="col-sm-2 control-label">Foto Baru</label>
+                                          <div class="col-sm-10">
+                                            <input type="hidden" name="oldImage" value="{{ Storage::url(auth()->user()->image) }}">
+                                            {{-- @if(Storage::url(auth()->user()->image))
+                                            <img src="{{ Storage::url(auth()->user()->image) }}" class="img-preview img-fluid mb-3 col-sm-4 d-block">
+                                            @else
+                                              
+                                            @endif --}}
+                                            <img class="img-preview img-fluid mb-3 col-sm-6">
+                                            <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image" onchange="previewImage()">
+                                            <div class="text-danger">
+                                              @error('image')
+                                                <div class="invalid-feedback">
+                                                  {{ $message }}
+                                                </div>
+                                              @enderror
+                                            </div>
+                                          </div>
+                                        </div>
+                                       
+                                        
+                                        <div class="form-group">
+                                          <div class="col-sm-offset-2 col-sm-10">
+                                            <button type="submit" class="btn btn-primary">Ubah Foto </button>
+                                          </div>
+                                        </div>
+                                      </form>
+                                    </div> 
+<script>
+
+function previewImage(){
+  const image = document.querySelector('#image');
+  const imgPreview = document.querySelector('.img-preview');
+
+  imgPreview.style.display = 'block';
+  const oFReader = new FileReader();
+  oFReader.readAsDataURL(image.files[0]);
+
+  oFReader.onload = function(oFREvent) {
+    imgPreview.src = oFREvent.target.result;
+  }
+}  
+
+</script>
 @endsection
+

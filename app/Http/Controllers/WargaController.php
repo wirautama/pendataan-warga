@@ -23,11 +23,12 @@ class WargaController extends Controller
             'hitungwarga' => WargaModel::count(),
             'laki' => WargaModel::where('jenis_kelamin_warga', 'L')->count(),
             'perempuan' => WargaModel::where('jenis_kelamin_warga', 'P')->count(),
-            // 'lebihdari17' => WargaModel::where('tanggal_lahir_warga', '>=', date('Y-m-d'))->count(),
-            //kd17 =  "SELECT COUNT(*) AS total FROM warga WHERE TIMESTAMPDIFF(YEAR, tanggal_lahir_warga, CURDATE()) < 17 AND tanggal_lahir_warga != '0000-00-00'";
-            // 'usia_warga' => WargaModel::raw('TIMESTAMPDIFF(year, startDateTime, endDateTime) as duration')
+            'lebihdari17' => DB::select("SELECT COUNT(*) AS total FROM warga WHERE TIMESTAMPDIFF(YEAR, tanggal_lahir_warga, CURDATE()) >= 17 AND tanggal_lahir_warga != '0000-00-00'"),
         ];
+       
+        
         return view('warga.v_datawarga', $data);
+        // dd($data);
     }
 
     public function detail($nik_warga) {

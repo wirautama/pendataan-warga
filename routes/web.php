@@ -60,8 +60,9 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/kartukeluarga/add', [KartukeluargaController::class, 'add']);
     Route::post('/kartukeluarga/insert', [KartukeluargaController::class, 'insert']);
     // Route::post('/kartukeluarga/addAnggota', [KartukeluargaController::class, 'Addanggota']);
-    Route::get('/kartukeluarga/editAnggota/{nomor_keluarga}', [KartukeluargaController::class, 'editAnggota']);
+    Route::get('/kartukeluarga/editAnggota/{nomor_keluarga}', [KartukeluargaController::class, 'editAnggota'])->name('editAnggota');
     Route::post('/kartukeluarga/insertAnggota/{nomor_keluarga}', [KartukeluargaController::class, 'insertAnggota'])->name('insertAnggota');
+    Route::get('/kartukeluarga/editAnggota/hapusAnggota/{nik_warga}/{nomor_keluarga}', [KartukeluargaController::class, 'hapusAnggota'])->name('hapusAnggota');
     Route::get('/kartukeluarga/edit/{nomor_keluarga}', [KartukeluargaController::class, 'edit']);
     Route::post('/kartukeluarga/update/{nomor_keluarga}', [KartukeluargaController::class, 'update']);
     Route::get('/kartukeluarga/delete/{nomor_keluarga}', [KartukeluargaController::class, 'delete']);
@@ -107,6 +108,7 @@ Route::group(['middleware' => ['auth']], function(){
 
     Route::get('/profile', [ProfileController::class, 'index']);
     Route::post('/profile/updatepassword', [ProfileController::class, 'ubahPassword'])->name('ubahpassword');
+    Route::post('/profile/ubahimage', [ProfileController::class, 'ubahImage'])->name('ubahimage');
 
 }); 
 

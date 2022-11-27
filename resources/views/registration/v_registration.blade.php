@@ -88,7 +88,8 @@
         {{-- <span class="glyphicon glyphicon-envelope form-control-feedback"></span> --}}
       </div>
       <div class="form-group has-feedback">
-        <input type="file" id="image" class="form-control @error('image') is-invalid  @enderror"  placeholder="Foto Profil" name="image" required>
+        <img class="img-preview img-fluid mb-3 col-sm-6">
+        <input type="file" id="image" class="form-control @error('image') is-invalid  @enderror"  placeholder="Foto Profil" name="image" onchange="previewImage()" required>
         @error('image')
         <div class="invalid-feedback">
           {{ $message }}
@@ -140,6 +141,36 @@
       increaseArea: '20%' /* optional */
     });
   });
+
+  function previewImage(){
+    const image = document.querySelector('#image');
+    const imgPreview = document.querySelector('.img-preview');
+  
+    imgPreview.style.display = 'block';
+    const oFReader = new FileReader();
+    oFReader.readAsDataURL(image.files[0]);
+  
+    oFReader.onload = function(oFREvent) {
+      imgPreview.src = oFREvent.target.result;
+    }
+  }
 </script>
+<script>
+
+  function previewImage(){
+    const image = document.querySelector('#image');
+    const imgPreview = document.querySelector('.img-preview');
+  
+    imgPreview.style.display = 'block';
+    const oFReader = new FileReader();
+    oFReader.readAsDataURL(image.files[0]);
+  
+    oFReader.onload = function(oFREvent) {
+      imgPreview.src = oFREvent.target.result;
+    }
+  }  
+  
+  </script>
+  
 </body>
 </html>

@@ -21,10 +21,7 @@ class Warga_has_kartu_keluargaModel extends Model
         return DB::table('warga_has_kartu_keluarga')->get();
     }
 
-    public function anggotaKeluarga() {
-        // return DB::table('warga')
-        //     ->join('warga_has_kartu_keluarga', 'warga_has_kartu_keluarga.nik_warga', '=', 'warga.nik_warga')
-        //     ->where('warga_has_kartu_keluarga.nik_warga', '=', 'nomor_keluarga')
-        //     ->get();
+    public function deleteAnggota($nik_warga, $nomor_keluarga) {
+        DB::table('warga_has_kartu_keluarga')->where('nik_warga','=', $nik_warga)->where('nomor_keluarga','=', $nomor_keluarga)->delete();
     }
 }

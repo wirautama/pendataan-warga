@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Storage;
+use File;
 
 class ProfileController extends Controller
 {
@@ -31,5 +33,22 @@ class ProfileController extends Controller
         throw ValidationException::withMessages([
             'password_lama' => 'Password Anda Tidak Cocok Dengan Data Kami',
         ]);
+    }
+
+    public function ubahImage(Request $request) {
+        $request->validate([
+            'image' => 'image|file|mimes:jpeg,png,jpg,gif,svg|max:1024'
+        ]);
+         
+        if($request->file('image')){
+            if(File::exists(public_path(auth()->user()->image))){
+                File::delete(public_path(auth()->user()->image));
+            } 
+            // $validatedData['image'] = $request->file('image')->store('public/user-image');
+            auth()->user()->update(['image' => $request->file('image')->store('public/user-image')]);
+            return back()->with('message', 'Foto Profil Anda Telah Di Ubah');    
+            // dd(File::exists(public_path(auth()->user()->image)));
+        }
+       
     }
 }

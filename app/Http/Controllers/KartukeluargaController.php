@@ -11,6 +11,7 @@ use App\Models\WargaModel;
 use Carbon\Carbon;
 use Dompdf\Dompdf;
 use DB;
+use Redirect;
 
 class KartukeluargaController extends Controller
 {
@@ -119,19 +120,30 @@ class KartukeluargaController extends Controller
     }
 
     public function insertAnggota(request $request, $nomor_keluarga) {
-        
         $data = [
-            'warga' => Request()->nik_warga,
-            'nomor_keluarga' => DB::table('kartu_keluarga')->select('nomor_keluarga')->get()
-    ];
-        
-        //  DB::table('warga_has_kartu_keluarga')->insert('nik_warga', '=', $nik_warga, 'nomor_keluarga', '=', $nomor_keluarga);
-        //  $query = Warga_has_kartu_keluargaModel::insert('nik_warga','nomor_keluarga' ($nik_warga));
-        // $nomor_keluarga = KartukeluargaModel::find(1); 
- 
-        Warga_has_kartu_keluargaModel::insert($data);
+            'kartu_keluarga' => $this->KartukeluargaModel->detailData($nomor_keluarga),
+            'anggota_keluarga' => $this->KartukeluargaModel->anggotaKeluarga($nomor_keluarga),
+            'data_warga' => $this->WargaModel->allData()
+        ];
+        $data2 = [
+            'nik_warga' => Request()->nik_warga,
+            'nomor_keluarga' => DB::table('kartu_keluarga')->addSelect('nomor_keluarga')->pluck('nomor_keluarga'),  
+            'nomor_keluarga' =>implode(['nomor_keluarga'=>$nomor_keluarga])   
+        ];
+        if(Warga_has_kartu_keluargaModel::where('nik_warga', '=', Request()->nik_warga)->first() != null) {
+            return back()->with('ada', 'Anggota telah terdaftar');
+        }
+        Warga_has_kartu_keluargaModel::insert($data2);
+        // return view('kartukeluarga.v_editanggotakartukeluarga', $data)->with('pesan', 'Data Berhasil Di Update');
+        return redirect()->back()->with('pesan', 'Anggota Keluarga Berhasil Di Update');
 
-        dd($data);
+     }
+
+     public function hapusAnggota($nik_warga, $nomor_keluarga){
+        $this->Warga_has_kartu_keluargaModel->deleteAnggota($nik_warga, $nomor_keluarga);
+        return redirect()->back()->with('hapus', 'Data Berhasil Di Hapus');
+        
+       
      }
     
 
