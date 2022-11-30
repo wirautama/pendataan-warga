@@ -131,12 +131,12 @@
                                           <label for="inputName" class="col-sm-2 control-label">Foto Baru</label>
                                           <div class="col-sm-10">
                                             <input type="hidden" name="oldImage" value="{{ Storage::url(auth()->user()->image) }}">
-                                            {{-- @if(Storage::url(auth()->user()->image))
+                                            @if(Storage::url(auth()->user()->image))
                                             <img src="{{ Storage::url(auth()->user()->image) }}" class="img-preview img-fluid mb-3 col-sm-4 d-block">
                                             @else
-                                              
-                                            @endif --}}
-                                            <img class="img-preview img-fluid mb-3 col-sm-6">
+                                            <img class="img-preview img-fluid mb-3 col-sm-6">  
+                                            @endif
+                                            
                                             <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image" onchange="previewImage()">
                                             <div class="text-danger">
                                               @error('image')

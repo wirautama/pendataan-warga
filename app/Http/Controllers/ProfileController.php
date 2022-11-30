@@ -14,8 +14,9 @@ class ProfileController extends Controller
     public function index() {
         $data = [
             'user' => User::all(),
+
         ];
-        return view('profile.v_profile');
+        return view('profile.v_profile', $data);
     }   
 
     public function ubahPassword(Request $request) {
@@ -36,18 +37,19 @@ class ProfileController extends Controller
     }
 
     public function ubahImage(Request $request) {
+        $oldImage = $request->oldImage;
         $request->validate([
             'image' => 'image|file|mimes:jpeg,png,jpg,gif,svg|max:1024'
         ]);
          
         if($request->file('image')){
-            if(File::exists(public_path(auth()->user()->image))){
-                File::delete(public_path(auth()->user()->image));
+            if($request->oldImage){
+                unlink(public_path($request->oldImage));
+                
             } 
             // $validatedData['image'] = $request->file('image')->store('public/user-image');
             auth()->user()->update(['image' => $request->file('image')->store('public/user-image')]);
             return back()->with('message', 'Foto Profil Anda Telah Di Ubah');    
-            // dd(File::exists(public_path(auth()->user()->image)));
         }
        
     }
