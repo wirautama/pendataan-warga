@@ -59,13 +59,13 @@
         <td>:</td>
         <td><textarea class="form-control" name="phone">{{ $user->phone }}</textarea></td>
       </tr>
-        <th>Password</th>
+        {{-- <th>Password</th>
         <td>:</td>
         <td>
-          <input type="password" class="form-control glyphicon glyphicon-eye-close" id="show_hide_password" class="form-control"  value="{{ $user->password }}" name="password">
+          <input type="password" class="form-control glyphicon glyphicon-eye-close" id="show_hide_password" class="form-control"  value="{{ $user->password }}" name="password"> --}}
           {{-- <small>Jika dikosongkan, maka password tidak berubah</small> --}}
-        </td>
-      </tr>
+        {{-- </td> --}}
+      {{-- </tr> --}}
     </table>
     
 
