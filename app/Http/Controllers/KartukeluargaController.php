@@ -27,7 +27,9 @@ class KartukeluargaController extends Controller
         $data = [
             'kartu_keluarga' => $this->KartukeluargaModel->allData(),
             'hitungkeluarga' => KartukeluargaModel::count(),
+            'jml_anggota' => Warga_has_kartu_keluargaModel::select('nomor_keluarga')->groupBy('nomor_keluarga')
         ];
+        
         return view('kartukeluarga.v_kartukeluarga', $data);
         // dd($data);
     }

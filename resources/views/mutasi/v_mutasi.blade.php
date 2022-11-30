@@ -88,10 +88,14 @@
     <dd>{{ $perempuan }} orang</dd>
 
     <dt>Warga < 17 tahun</dt>
-    <dd> orang</dd>
+    @foreach($kurangdari17 as $kurang)
+    <dd>{{ $kurang->total }} orang</dd>
+    @endforeach
 
     <dt>Warga >= 17 tahun</dt>
-    <dd> orang</dd>
+    @foreach($lebihdari17 as $lebih)
+    <dd>{{ $lebih->total }} orang</dd>
+    @endforeach
   </dl>
 </div>
 

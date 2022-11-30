@@ -20,7 +20,9 @@ class MutasiController extends Controller
             'mutasi' => DB::select(DB::raw("SELECT *, TIMESTAMPDIFF(YEAR, `tanggal_lahir_mutasi`, CURDATE()) AS usia_mutasi FROM mutasi")),
             'hitungmutasi' => MutasiModel::count(),
             'laki' => MutasiModel::where('jenis_kelamin_mutasi', 'L')->count(),
-            'perempuan' => MutasiModel::where('jenis_kelamin_mutasi', 'P')->count()
+            'perempuan' => MutasiModel::where('jenis_kelamin_mutasi', 'P')->count(),
+            'lebihdari17' => DB::select(DB::raw("SELECT COUNT(*) AS total FROM mutasi WHERE TIMESTAMPDIFF(YEAR, tanggal_lahir_mutasi, CURDATE()) >= 17 AND tanggal_lahir_mutasi != '0000-00-00'")),
+            'kurangdari17' =>DB::select(DB::raw("SELECT COUNT(*) AS total FROM mutasi WHERE TIMESTAMPDIFF(YEAR, tanggal_lahir_mutasi, CURDATE()) < 17 AND tanggal_lahir_mutasi != '0000-00-00'"))
         ];
         return view('mutasi.v_mutasi', $data);
     }

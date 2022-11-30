@@ -21,7 +21,7 @@
         <th>Nomor KK</th>
         <th>Kepala Keluarga</th>
         <th>NIK Kepala Keluarga</th>
-        {{-- <th>Anggota Keluarga</th> --}}
+        <th>Jml Anggota</th>
         <th>Alamat</th>
         <th>RT</th>
         <th>RW</th>
@@ -37,7 +37,7 @@
         <td>{{ $data->nomor_keluarga }}</td>
         <td>{{ $data->nama_warga }}</td>
         <td>{{ $data->nik_kepala_keluarga }}</td>
-        {{-- <td>{{ $jumlah[''] }}</td> --}}
+        <td>{{ $jml_anggota->count() }} Anggota</td>
         <td>{{ $data->alamat_keluarga }}</td>
         <td>{{ $data->rt_keluarga }}</td>
         <td>{{ $data->rw_keluarga }}</td>

@@ -143,6 +143,6 @@
   @endforeach
   </tbody>
 </table>
-<a href="/user" class="btn btn-success btn-lg">Kembali</a>
+<a href="/kartukeluarga" class="btn btn-success btn-lg">Kembali</a>
 
 @endsection
