@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Models\UserModel;
 use App\Models\User;
@@ -11,26 +12,30 @@ class UserController extends Controller
 {
     public function __construct()
     {
+
         $this->User = new User();
     }
 
-    public function index(){
+    public function index()
+    {
         $data = [
             'user' => User::all()
         ];
         return view('user.v_user', $data);
     }
 
-    public function detail($id) {
+    public function detail($id)
+    {
         $data = [
             'user' => User::find($id)
         ];
         return view('user.v_detailuser', $data);
     }
 
-    public function insert(Request $request){
-        $request->validate =([
-            'name' =>'required|min:5|max:255',
+    public function insert(Request $request)
+    {
+        $request->validate = ([
+            'name' => 'required|min:5|max:255',
             'level' => 'required',
             'email' => 'required|email:dns',
             'address' => 'required',
@@ -48,7 +53,7 @@ class UserController extends Controller
         // $user->created_at = Carbon::now()->toDateTImeString();
         // $user->updated_at = Carbon::now()->toDateTimeString();
         // $user->save();
-        
+
         $user = User::create(request(['name', 'level', 'email', 'address', 'phone', 'password']));
 
 
@@ -56,17 +61,19 @@ class UserController extends Controller
         return redirect()->route('user')->with('pesan', 'Data Berhasil Di Tambahkan');
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
         $data = [
             'user' => User::find($id),
         ];
         return view('user.v_edituser', $data);
     }
 
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id)
+    {
         // validation
-        $request->validate =([
-            'name' =>'required|min:5|max:255',
+        $request->validate = ([
+            'name' => 'required|min:5|max:255',
             'level' => 'required',
             'email' => 'required|email:dns',
             'address' => 'required',
@@ -84,41 +91,44 @@ class UserController extends Controller
         return redirect()->route('user')->with('pesan', 'Data Berhasil Di Update');
     }
 
-    public function add() {
+    public function add()
+    {
         return view('user.v_adduser');
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         $user = User::find($id)->delete();
         return redirect()->route('user')->with('pesan', 'Data Berhasil Di Hapus');
     }
 
-    public function cetaklaporanuser(){
+    public function cetaklaporanuser()
+    {
         $data = [
             'user' => User::all()
         ];
         return view('user.v_cetaklaporanuser', $data);
     }
 
-    public function downloadlaporanuser(){
+    public function downloadlaporanuser()
+    {
         $data = [
             'user' => User::all()
         ];
         $html = view('user.downloadlaporanuser', $data);
-   
+
         $dompdf = new Dompdf();
         $dompdf->loadHtml($html);
-   
+
         $dompdf->setPaper('A4', 'Potrait');
         $dompdf->render();
         $dompdf->stream('Download-Laporan-User.pdf');
     }
-    public function printlaporanuser() {
+    public function printlaporanuser()
+    {
         $data = [
             'user' => User::all()
         ];
         return view('user.printlaporanuser', $data);
-     }
-
-
+    }
 }

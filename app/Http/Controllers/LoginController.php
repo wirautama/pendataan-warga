@@ -8,22 +8,25 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return view('login.v_login');
     }
 
-    public function postlogin(Request $request) {
+    public function postlogin(Request $request)
+    {
         $validated = $request->validate([
-            'email' => 'required|email:dns',
+            'email' => 'required|min:5|max:255',
             'password' => 'required|min:5|max:255'
-         ]);
-        if (Auth::attempt($request->only('email', 'password'))){
+        ]);
+        if (Auth::attempt($request->only('email', 'password'))) {
             return redirect('/dashboard')->with('success', 'Selamat Datang');
         }
         return redirect('login')->with('failed', 'Username atau Password Salah');
     }
 
-    public function logout(){
+    public function logout()
+    {
         Auth::logout();
         request()->session()->invalidate();
         request()->session()->regenerateToken();

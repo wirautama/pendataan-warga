@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-use App\Models\WargaModel;
+
 
 class WargaModel extends Model
 {
@@ -13,10 +13,10 @@ class WargaModel extends Model
 
 
     protected $fillable = [
-        'nik_warga', 
-        'nama_warga', 
-        'tempat_lahir_warga', 
-        'tanggal_lahir_warga', 
+        'nik_warga',
+        'nama_warga',
+        'tempat_lahir_warga',
+        'tanggal_lahir_warga',
         'jenis_kelamin_warga',
         'alamat_ktp_warga',
         'alamat_warga',
@@ -32,7 +32,8 @@ class WargaModel extends Model
         'status_warga',
         'id_user'
     ];
-    public function allData(){
+    public function allData()
+    {
         return DB::table('warga')->get();
     }
 
@@ -44,26 +45,30 @@ class WargaModel extends Model
 
 
 
-    public function detailData($nik_warga) {
+    public function detailData($nik_warga)
+    {
         return DB::table('warga')->where('nik_warga', $nik_warga)->first();
     }
 
 
-    public function addData($data){
-        
-        DB::table('warga')->insert($data);
+    public function addData($data)
+    {
 
+        DB::table('warga')->insert($data);
     }
 
-    public function editData($nik_warga, $data){
+    public function editData($nik_warga, $data)
+    {
         DB::table('warga')->where('nik_warga', $nik_warga)->update($data);
     }
 
-    public function deleteData($nik_warga){
+    public function deleteData($nik_warga)
+    {
         DB::table('warga')->where('nik_warga', $nik_warga)->delete();
     }
 
-    public function countData() {
+    public function countData()
+    {
         DB::table('warga')->count();
     }
 }

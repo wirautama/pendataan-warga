@@ -1,21 +1,26 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Models\WargaModel;
+use App\Models\MutasiModel;
 use Carbon\Carbon;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Dompdf\Dompdf;
+
 
 class WargaController extends Controller
 {
+    protected $WargaModel;
+    protected $MutasiModel;
     public function __construct()
     {
         $this->WargaModel = new WargaModel();
-        
     }
 
-    public function index(){
+    public function index()
+    {
         // $year = Carbon::now()->format('Y');
         $data = [
             // 'warga' => WargaModel::all(),
@@ -23,19 +28,20 @@ class WargaController extends Controller
             'hitungwarga' => WargaModel::count(),
             'laki' => WargaModel::where('jenis_kelamin_warga', 'L')->count(),
             'perempuan' => WargaModel::where('jenis_kelamin_warga', 'P')->count(),
-            'lebihdari17' => DB::select(DB::raw("SELECT COUNT(*) AS total FROM warga WHERE TIMESTAMPDIFF(YEAR, tanggal_lahir_warga, CURDATE()) >= 17 AND tanggal_lahir_warga != '0000-00-00'")),
-            'kurangdari17' =>DB::select(DB::raw("SELECT COUNT(*) AS total FROM warga WHERE TIMESTAMPDIFF(YEAR, tanggal_lahir_warga, CURDATE()) < 17 AND tanggal_lahir_warga != '0000-00-00'"))
+            'lebihdari17' => DB::select(DB::raw("SELECT COUNT(*) AS total FROM warga WHERE TIMESTAMPDIFF(YEAR, tanggal_lahir_warga, CURDATE()) >= 17 AND tanggal_lahir_warga != '2022-12-23'")),
+            'kurangdari17' => DB::select(DB::raw("SELECT COUNT(*) AS total FROM warga WHERE TIMESTAMPDIFF(YEAR, tanggal_lahir_warga, CURDATE()) < 17 AND tanggal_lahir_warga != '2022-12-23'"))
         ];
-         
-       
+
+
         return view('warga.v_datawarga', $data);
         // dd($data);
 
         // "total": 5
     }
 
-    public function detail($nik_warga) {
-        if(!$this->WargaModel->detailData($nik_warga)){
+    public function detail($nik_warga)
+    {
+        if (!$this->WargaModel->detailData($nik_warga)) {
             abort(404);
         }
 
@@ -45,11 +51,13 @@ class WargaController extends Controller
         return view('warga.v_detailwarga', $data);
     }
 
-    public function add(){
+    public function add()
+    {
         return view('warga.v_addwarga');
     }
 
-    public function insert(Request $request){
+    public function insert(Request $request)
+    {
         $validated = $request->validate([
             'nik_warga' => 'required|unique:warga|min:13|max:20',
             'nama_warga' => 'required|min:5|max:255',
@@ -69,8 +77,8 @@ class WargaController extends Controller
             'pendidikan_terakhir_warga' => 'required',
             'pekerjaan_warga' => 'required|min:5|max:255',
             'status_perkawinan_warga' => 'required',
-            'status_warga' => 'required', 
-            
+            'status_warga' => 'required',
+
         ]);
 
         $data = [
@@ -97,13 +105,14 @@ class WargaController extends Controller
             'created_at' => Carbon::now()->toDateTimeString(),
             'updated_at' => Carbon::now()->toDateTimeString()
 
-        ];    
+        ];
         $this->WargaModel->addData($data);
         return redirect()->route('warga')->with('pesan', 'Data Berhasil Di Tambahkan');
     }
 
-    public function edit($nik_warga) {
-        if(!$this->WargaModel->detailData($nik_warga)){
+    public function edit($nik_warga)
+    {
+        if (!$this->WargaModel->detailData($nik_warga)) {
             abort(404);
         }
 
@@ -113,7 +122,8 @@ class WargaController extends Controller
         return view('warga.v_editwarga', $data);
     }
 
-    public function update($nik_warga){
+    public function update($nik_warga)
+    {
         Request()->validate([
             'nik_warga' => 'required|min:13|max:20',
             'nama_warga' => 'required|min:5|max:255',
@@ -134,7 +144,7 @@ class WargaController extends Controller
             'pekerjaan_warga' => 'required|min:5|max:255',
             'status_perkawinan_warga' => 'required',
             'status_warga' => 'required',
-            
+
         ]);
         $data = [
             'nik_warga' => Request()->nik_warga,
@@ -163,13 +173,15 @@ class WargaController extends Controller
         return redirect()->route('warga')->with('pesan', 'Data Berhasil Di Update');
     }
 
-    public function delete($nik_warga) {
+    public function delete($nik_warga)
+    {
         $this->WargaModel->deleteData($nik_warga);
         return redirect()->route('warga')->with('pesan', 'Data Berhasil Di Hapus');
     }
 
-    public function mutasi($nik_warga) {
-        if(!$this->WargaModel->detailData($nik_warga)){
+    public function mutasi($nik_warga)
+    {
+        if (!$this->WargaModel->detailData($nik_warga)) {
             abort(404);
         }
 
@@ -179,7 +191,8 @@ class WargaController extends Controller
         return view('mutasi.v_addmutasi', $data);
     }
 
-    public function addMutasi(Request $request,$nik_warga) {
+    public function addMutasi(Request $request, $nik_warga)
+    {
         $validated = $request()->validate([
             'nik_mutasi' => 'required|min:13|max:20',
             'nama_mutasi' => 'required|min:5|max:255',
@@ -217,16 +230,18 @@ class WargaController extends Controller
         return redirect()->route('warga')->with('pesan', 'Data Berhasil Di Mutasi');
     }
 
-    public function print() {
-       $data = [
-        'warga' => $this->WargaModel->allData(),
-       ];
-       return view('warga.v_printdatawarga', $data);
+    public function print()
+    {
+        $data = [
+            'warga' => $this->WargaModel->allData(),
+        ];
+        return view('warga.v_printdatawarga', $data);
     }
 
-    public function downloadpdf() {
+    public function downloadpdf()
+    {
         $data = [
-         'warga' => $this->WargaModel->allData(),
+            'warga' => $this->WargaModel->allData(),
         ];
         $html = view('warga.v_downloadpdf', $data);
 
@@ -236,64 +251,67 @@ class WargaController extends Controller
         $dompdf->setPaper('A4', 'landscape');
         $dompdf->render();
         $dompdf->stream('Laporan-Data-Warga.pdf');
-     }
+    }
 
-     public function cetakwarga($nik_warga) {
+    public function cetakwarga($nik_warga)
+    {
         $data = [
-         'warga' => $this->WargaModel->detailData($nik_warga),
+            'warga' => $this->WargaModel->detailData($nik_warga),
         ];
         return view('warga.v_cetakwarga', $data);
-        
-     }
+    }
 
-     public function printdatawarga($nik_warga){
+    public function printdatawarga($nik_warga)
+    {
         $data = [
             'warga' => $this->WargaModel->detailData($nik_warga),
-           ];
-           return view('warga.printdatawarga', $data);
-     }
+        ];
+        return view('warga.printdatawarga', $data);
+    }
 
-     public function downloadpdfwarga($nik_warga) {
+    public function downloadpdfwarga($nik_warga)
+    {
         $data = [
             'warga' => $this->WargaModel->detailData($nik_warga),
-           ];
-           $html = view('warga.downloadpdfwarga', $data);
-   
-           $dompdf = new Dompdf();
-           $dompdf->loadHtml($html);
-   
-           $dompdf->setPaper('A4', 'potrait');
-           $dompdf->render();
-           $dompdf->stream('Download-Data-Warga.pdf');
-     }
+        ];
+        $html = view('warga.downloadpdfwarga', $data);
 
-     public function cetaklaporan() {
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml($html);
+
+        $dompdf->setPaper('A4', 'potrait');
+        $dompdf->render();
+        $dompdf->stream('Download-Data-Warga.pdf');
+    }
+
+    public function cetaklaporan()
+    {
         $data = [
             'warga' => $this->WargaModel->allData(),
         ];
         return view('warga.v_cetaklaporan', $data);
-     }
+    }
 
-     public function downloadlaporanpdf() {
+    public function downloadlaporanpdf()
+    {
         $data = [
             'warga' => $this->WargaModel->allData(),
-           ];
-           $html = view('warga.downloadlaporanpdf', $data);
-   
-           $dompdf = new Dompdf();
-           $dompdf->loadHtml($html);
-   
-           $dompdf->setPaper('A4', 'landscape');
-           $dompdf->render();
-           $dompdf->stream('Download-Laporan-Warga.pdf');
-     }
+        ];
+        $html = view('warga.downloadlaporanpdf', $data);
 
-     public function printlaporan() {
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml($html);
+
+        $dompdf->setPaper('A4', 'landscape');
+        $dompdf->render();
+        $dompdf->stream('Download-Laporan-Warga.pdf');
+    }
+
+    public function printlaporan()
+    {
         $data = [
             'warga' => $this->WargaModel->allData(),
         ];
         return view('warga.printlaporan', $data);
-     }
-
+    }
 }
- 
